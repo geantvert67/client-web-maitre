@@ -9,3 +9,21 @@ body {
     color: white !important;
     border: none !important;
 }
+
+.card {
+    background-color: #1b1e22 !important;
+    border: none !important;
+    box-shadow: 0px 1px 3px #1b1e22;
+}
+
+.card-subtitle {
+    color: #d2d2d2 !important;
+    font-weight: 400 !important;
+}
+
+.team-color {
+    height: 50px;
+    width: 50px;
+    border-radius: 4px;
+    box-shadow: 0px 1px 3px #1b1e22;
+}

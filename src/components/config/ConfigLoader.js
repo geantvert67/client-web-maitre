@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSocket } from '../../utils/useSocket';
 import { Row, Col, Spinner } from 'react-bootstrap';
+import Config from './Config';
 
 function ConfigLoader() {
     const { socket } = useSocket();
@@ -15,7 +16,7 @@ function ConfigLoader() {
         config.launched ? (
             <p>map</p>
         ) : (
-            <p>équipes</p>
+            <Config config={config} />
         )
     ) : (
         <Row className="justify-content-center">
