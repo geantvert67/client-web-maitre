@@ -10,7 +10,8 @@
         "react": "^16.13.1",
         "react-bootstrap": "^1.0.0",
         "react-dom": "^16.13.1",
-        "react-scripts": "3.4.1"
+        "react-scripts": "3.4.1",
+        "socket.io-client": "^2.3.0"
     },
     "scripts": {
         "start": "cross-env REACT_APP_SERVER_URL=127.0.0.1 REACT_APP_SERVER_PORT=8081 react-scripts start",
