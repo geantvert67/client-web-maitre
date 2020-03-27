@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSocket } from '../../utils/useSocket';
-import { Row, Col, Spinner } from 'react-bootstrap';
+import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import Config from './Config';
 
 function ConfigLoader() {
@@ -19,11 +19,13 @@ function ConfigLoader() {
             <Config config={config} />
         )
     ) : (
-        <Row className="justify-content-center">
-            <Col xs="auto">
-                <Spinner animation="border" variant="light" />
-            </Col>
-        </Row>
+        <Container className="mt-5 mb-5">
+            <Row className="justify-content-center">
+                <Col xs="auto">
+                    <Spinner animation="border" variant="light" />
+                </Col>
+            </Row>
+        </Container>
     );
 }
 
