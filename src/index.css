@@ -10,6 +10,16 @@ body {
     border: none !important;
 }
 
+.btn-success {
+    border-color: #68b684 !important;
+    background-color: #68b684 !important;
+}
+
+.btn-success:hover {
+    border-color: #569e70 !important;
+    background-color: #569e70 !important;
+}
+
 .card {
     background-color: #1b1e22 !important;
     border: none !important;
