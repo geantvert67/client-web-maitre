@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSocket } from '../../utils/useSocket';
 import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import Config from './Config';
+import MapWrapper from '../map/MapWrapper';
 
 function ConfigLoader() {
     const { socket } = useSocket();
@@ -13,8 +14,8 @@ function ConfigLoader() {
     }, []);
 
     return config ? (
-        config.launched ? (
-            <p>map</p>
+        config.launched || config.willLaunchAt ? (
+            <MapWrapper config={config} />
         ) : (
             <Config config={config} />
         )
