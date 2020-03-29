@@ -70,6 +70,11 @@ input[type]:focus,
     width: 100% !important;
 }
 
+.leaflet-div-icon {
+    background: transparent !important;
+    border: none !important;
+}
+
 .leaflet-control-zoom,
 .leaflet-control-attribution {
     display: none;
