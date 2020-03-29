@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import TeamsList from '../teams/TeamsList';
 import ConfigLauncher from './ConfigLauncher';
+import ConfigVisibility from './ConfigVisibility';
 
 function Config({ config }) {
     return (
@@ -10,7 +11,10 @@ function Config({ config }) {
                 <Col md={{ span: 6, offset: 3 }}>
                     <h3>{`${config.name} - ${config.gameMode}`}</h3>
 
-                    <h5 className="mb-4">Lancement</h5>
+                    <h5 className="mb-4">Visibilité</h5>
+                    <ConfigVisibility published={config.published} />
+
+                    <h5 className="mt-5 mb-4">Lancement</h5>
                     <ConfigLauncher />
 
                     <h5 className="mt-5 mb-4">Équipes</h5>
