@@ -10,6 +10,19 @@ body {
     border: none !important;
 }
 
+.alert-success {
+    border: none !important;
+    background-color: #68b684 !important;
+    color: white !important;
+}
+
+.alert-toast {
+    position: absolute !important;
+    top: 2rem !important;
+    right: 2rem !important;
+    z-index: 998 !important;
+}
+
 .btn-success {
     border-color: #68b684 !important;
     background-color: #68b684 !important;
@@ -50,4 +63,14 @@ input[type]:focus,
     width: 50px;
     border-radius: 4px;
     box-shadow: 0px 1px 3px #1b1e22;
+}
+
+.map {
+    height: 100vh !important;
+    width: 100% !important;
+}
+
+.leaflet-control-zoom,
+.leaflet-control-attribution {
+    display: none;
 }
