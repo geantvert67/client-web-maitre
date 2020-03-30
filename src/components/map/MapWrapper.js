@@ -3,6 +3,7 @@ import moment from 'moment';
 import Map from './Map';
 import { Alert } from 'react-bootstrap';
 import { GameAreaProvider } from '../../utils/useGameAreas';
+import { ForbiddenAreaProvider } from '../../utils/useForbiddenAreas';
 
 function MapWrapper({ config }) {
     return (
@@ -14,7 +15,9 @@ function MapWrapper({ config }) {
                 </Alert>
             )}
             <GameAreaProvider>
-                <Map />
+                <ForbiddenAreaProvider>
+                    <Map />
+                </ForbiddenAreaProvider>
             </GameAreaProvider>
         </>
     );

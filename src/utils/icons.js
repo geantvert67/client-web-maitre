@@ -8,3 +8,12 @@ export const iconGameArea = new L.Icon({
     iconSize: new L.Point(60, 60),
     className: 'leaflet-div-icon',
 });
+
+export const iconForbiddenArea = new L.Icon({
+    iconUrl: require('../icons/gameArea.gif'),
+    iconRetinaUrl: require('../icons/gameArea.gif'),
+    iconAnchor: [25, 58],
+    popupAnchor: [0, 10],
+    iconSize: new L.Point(60, 60),
+    className: 'leaflet-div-icon',
+});

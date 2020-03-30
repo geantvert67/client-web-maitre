@@ -5,15 +5,19 @@ import { useSocket } from '../../utils/useSocket';
 import { useGameAreas } from '../../utils/useGameAreas';
 import GameArea from './GameArea';
 import { deserializePoint } from '../../utils/map';
+import { useForbiddenAreas } from '../../utils/useForbiddenAreas';
+import ForbiddenArea from './ForbiddenArea';
 
 function Map() {
     const { socket } = useSocket();
     const [position, setPosition] = useState([47.736544, 7.286776]);
     const { gameAreas, setGameAreas } = useGameAreas();
+    const { forbiddenAreas, setForbiddenAreas } = useForbiddenAreas();
 
     useEffect(() => {
         socket.on('getAreas', (a) => {
             setGameAreas(a.filter((a) => !a.forbidden));
+            setForbiddenAreas(a.filter((a) => a.forbidden));
         });
         socket.emit('getAreas');
     }, []);
@@ -32,6 +36,10 @@ function Map() {
 
             {gameAreas.map((area) => (
                 <GameArea key={area.id} area={area} />
+            ))}
+
+            {forbiddenAreas.map((area) => (
+                <ForbiddenArea key={area.id} area={area} />
             ))}
         </LeafletMap>
     );
