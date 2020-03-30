@@ -79,3 +79,9 @@ input[type]:focus,
 .leaflet-control-attribution {
     display: none;
 }
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+    background-color: #26292f !important;
+    color: white;
+}

@@ -4,6 +4,7 @@ import Map from './Map';
 import { Alert } from 'react-bootstrap';
 import { GameAreaProvider } from '../../utils/useGameAreas';
 import { ForbiddenAreaProvider } from '../../utils/useForbiddenAreas';
+import { PlayerProvider } from '../../utils/usePlayers';
 
 function MapWrapper({ config }) {
     return (
@@ -16,7 +17,9 @@ function MapWrapper({ config }) {
             )}
             <GameAreaProvider>
                 <ForbiddenAreaProvider>
-                    <Map />
+                    <PlayerProvider>
+                        <Map />
+                    </PlayerProvider>
                 </ForbiddenAreaProvider>
             </GameAreaProvider>
         </>

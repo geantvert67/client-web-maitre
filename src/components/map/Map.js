@@ -7,12 +7,15 @@ import GameArea from './GameArea';
 import { deserializePoint } from '../../utils/map';
 import { useForbiddenAreas } from '../../utils/useForbiddenAreas';
 import ForbiddenArea from './ForbiddenArea';
+import { usePlayers } from '../../utils/usePlayers';
+import { PlayerMarker } from './Markers';
 
 function Map() {
     const { socket } = useSocket();
     const [position, setPosition] = useState([47.736544, 7.286776]);
     const { gameAreas, setGameAreas } = useGameAreas();
     const { forbiddenAreas, setForbiddenAreas } = useForbiddenAreas();
+    const { players, setPlayers } = usePlayers();
 
     useEffect(() => {
         socket.on('getAreas', (a) => {
@@ -20,6 +23,13 @@ function Map() {
             setForbiddenAreas(a.filter((a) => a.forbidden));
         });
         socket.emit('getAreas');
+
+        socket.on('adminRoutine', (o) => {
+            setPlayers(o.players);
+        });
+        const interval = setInterval(() => socket.emit('adminRoutine'), 3000);
+
+        return () => clearInterval(interval);
     }, []);
 
     useEffect(() => {
@@ -41,6 +51,12 @@ function Map() {
             {forbiddenAreas.map((area) => (
                 <ForbiddenArea key={area.id} area={area} />
             ))}
+
+            {players
+                .filter((p) => p.coordinates.length > 0)
+                .map((player) => (
+                    <PlayerMarker key={player.username} player={player} />
+                ))}
         </LeafletMap>
     );
 }
