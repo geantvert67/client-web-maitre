@@ -9,6 +9,9 @@ import {
     iconMarkerPositive,
 } from '../../utils/icons';
 import { useConfig } from '../../utils/useConfig';
+import { useFlags } from '../../utils/useFlags';
+import { deserializeDragend } from '../../utils/map';
+import { useMarkers } from '../../utils/useMarkers';
 
 export function GameAreaMarker({ position }) {
     return <Marker position={position} icon={iconGameArea}></Marker>;
@@ -33,10 +36,16 @@ export function PlayerMarker({ player }) {
 export function FlagMarker({ flag }) {
     const color = flag.team ? flag.team.color : 'grey';
     const { config } = useConfig();
+    const { moveFlag } = useFlags();
 
     return (
         <>
-            <Marker position={flag.coordinates} icon={iconFlag(color)}>
+            <Marker
+                position={flag.coordinates}
+                icon={iconFlag(color)}
+                draggable
+                ondragend={(e) => moveFlag(deserializeDragend(e), flag)}
+            >
                 <Popup>
                     {flag.team
                         ? `Capturé par ${flag.team.name}`
@@ -56,6 +65,7 @@ export function FlagMarker({ flag }) {
 
 export function MarkerMarker({ marker }) {
     const color = marker.team.color;
+    const { moveMarker } = useMarkers();
 
     return (
         <Marker
@@ -65,6 +75,8 @@ export function MarkerMarker({ marker }) {
                     ? iconMarkerPositive(color)
                     : iconMarkerNegative(color)
             }
+            draggable
+            ondragend={(e) => moveMarker(deserializeDragend(e), marker)}
         >
             <Popup>
                 Point {marker.isPositive ? "d'intérêt" : 'de désintérêt'}{' '}
