@@ -26,8 +26,15 @@ export const MarkerProvider = ({ children }) => {
         }
     };
 
+    const deleteMarker = (marker) => {
+        setMarkers(markers.filter((m) => m.id !== marker.id));
+        socket.emit('deleteMarker', marker.id);
+    };
+
     return (
-        <MarkerContext.Provider value={{ markers, setMarkers, moveMarker }}>
+        <MarkerContext.Provider
+            value={{ markers, setMarkers, moveMarker, deleteMarker }}
+        >
             {children}
         </MarkerContext.Provider>
     );

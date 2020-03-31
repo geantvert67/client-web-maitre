@@ -12,6 +12,7 @@ import { useConfig } from '../../utils/useConfig';
 import { useFlags } from '../../utils/useFlags';
 import { deserializeDragend } from '../../utils/map';
 import { useMarkers } from '../../utils/useMarkers';
+import { Button, Row, Col } from 'react-bootstrap';
 
 export function GameAreaMarker({ position }) {
     return <Marker position={position} icon={iconGameArea}></Marker>;
@@ -65,7 +66,7 @@ export function FlagMarker({ flag }) {
 
 export function MarkerMarker({ marker }) {
     const color = marker.team.color;
-    const { moveMarker } = useMarkers();
+    const { moveMarker, deleteMarker } = useMarkers();
 
     return (
         <Marker
@@ -79,8 +80,22 @@ export function MarkerMarker({ marker }) {
             ondragend={(e) => moveMarker(deserializeDragend(e), marker)}
         >
             <Popup>
-                Point {marker.isPositive ? "d'intérêt" : 'de désintérêt'}{' '}
-                signalé par {marker.team.name}
+                <Row className="justify-content-center">
+                    <Col xs="12">
+                        Point{' '}
+                        {marker.isPositive ? "d'intérêt" : 'de désintérêt'}{' '}
+                        signalé par {marker.team.name}
+                    </Col>
+                    <Col className="mt-2" xs="auto">
+                        <Button
+                            variant="danger"
+                            size="sm"
+                            onClick={() => deleteMarker(marker)}
+                        >
+                            Supprimer
+                        </Button>
+                    </Col>
+                </Row>
             </Popup>
         </Marker>
     );
