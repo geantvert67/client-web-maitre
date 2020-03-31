@@ -8,8 +8,9 @@ import { deserializePoint } from '../../utils/map';
 import { useForbiddenAreas } from '../../utils/useForbiddenAreas';
 import ForbiddenArea from './ForbiddenArea';
 import { usePlayers } from '../../utils/usePlayers';
-import { PlayerMarker, FlagMarker } from './Markers';
+import { PlayerMarker, FlagMarker, MarkerMarker } from './Markers';
 import { useFlags } from '../../utils/useFlags';
+import { useMarkers } from '../../utils/useMarkers';
 
 function Map() {
     const { socket } = useSocket();
@@ -18,6 +19,7 @@ function Map() {
     const { forbiddenAreas, setForbiddenAreas } = useForbiddenAreas();
     const { players, setPlayers } = usePlayers();
     const { flags, setFlags } = useFlags();
+    const { markers, setMarkers } = useMarkers();
 
     useEffect(() => {
         socket.on('getAreas', (a) => {
@@ -29,6 +31,7 @@ function Map() {
         socket.on('adminRoutine', (o) => {
             setPlayers(o.players);
             setFlags(o.flags);
+            setMarkers(o.markers);
         });
         const interval = setInterval(() => socket.emit('adminRoutine'), 3000);
 
@@ -63,6 +66,10 @@ function Map() {
 
             {flags.map((flag) => (
                 <FlagMarker key={flag.id} flag={flag} />
+            ))}
+
+            {markers.map((marker) => (
+                <MarkerMarker key={marker.id} marker={marker} />
             ))}
         </LeafletMap>
     );

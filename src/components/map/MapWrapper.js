@@ -6,6 +6,7 @@ import { GameAreaProvider } from '../../utils/useGameAreas';
 import { ForbiddenAreaProvider } from '../../utils/useForbiddenAreas';
 import { PlayerProvider } from '../../utils/usePlayers';
 import { FlagProvider } from '../../utils/useFlags';
+import { MarkerProvider } from '../../utils/useMarkers';
 
 function MapWrapper({ config }) {
     return (
@@ -20,7 +21,9 @@ function MapWrapper({ config }) {
                 <ForbiddenAreaProvider>
                     <PlayerProvider>
                         <FlagProvider>
-                            <Map />
+                            <MarkerProvider>
+                                <Map />
+                            </MarkerProvider>
                         </FlagProvider>
                     </PlayerProvider>
                 </ForbiddenAreaProvider>

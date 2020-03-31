@@ -5,6 +5,8 @@ import {
     iconGameArea,
     iconPlayer,
     iconFlag,
+    iconMarkerNegative,
+    iconMarkerPositive,
 } from '../../utils/icons';
 
 export function GameAreaMarker({ position }) {
@@ -28,7 +30,7 @@ export function PlayerMarker({ player }) {
 }
 
 export function FlagMarker({ flag }) {
-    let color = flag.team ? flag.team.color : 'grey';
+    const color = flag.team ? flag.team.color : 'grey';
 
     return (
         <Marker position={flag.coordinates} icon={iconFlag(color)}>
@@ -36,6 +38,26 @@ export function FlagMarker({ flag }) {
                 {flag.team ? `Capturé par ${flag.team.name}` : 'Non capturé'}
                 <br />
                 {flag.capturedUntil && `Incapturable`}
+            </Popup>
+        </Marker>
+    );
+}
+
+export function MarkerMarker({ marker }) {
+    const color = marker.team.color;
+
+    return (
+        <Marker
+            position={marker.coordinates}
+            icon={
+                marker.isPositive
+                    ? iconMarkerPositive(color)
+                    : iconMarkerNegative(color)
+            }
+        >
+            <Popup>
+                Point {marker.isPositive ? "d'intérêt" : 'de désintérêt'}{' '}
+                signalé par {marker.team.name}
             </Popup>
         </Marker>
     );
