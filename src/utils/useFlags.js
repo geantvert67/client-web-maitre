@@ -30,8 +30,13 @@ export const FlagProvider = ({ children }) => {
         }
     };
 
+    const deleteFlag = (flag) => {
+        setFlags(flags.filter((f) => f.id !== flag.id));
+        socket.emit('deleteFlag', flag.id);
+    };
+
     return (
-        <FlagContext.Provider value={{ flags, setFlags, moveFlag }}>
+        <FlagContext.Provider value={{ flags, setFlags, moveFlag, deleteFlag }}>
             {children}
         </FlagContext.Provider>
     );

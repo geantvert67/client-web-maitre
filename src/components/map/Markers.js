@@ -37,7 +37,7 @@ export function PlayerMarker({ player }) {
 export function FlagMarker({ flag }) {
     const color = flag.team ? flag.team.color : 'grey';
     const { config } = useConfig();
-    const { moveFlag } = useFlags();
+    const { moveFlag, deleteFlag } = useFlags();
 
     return (
         <>
@@ -48,11 +48,23 @@ export function FlagMarker({ flag }) {
                 ondragend={(e) => moveFlag(deserializeDragend(e), flag)}
             >
                 <Popup>
-                    {flag.team
-                        ? `Capturé par ${flag.team.name}`
-                        : 'Non capturé'}
-                    <br />
-                    {flag.capturedUntil && `Incapturable`}
+                    <Row className="justify-content-center">
+                        <Col xs="12">
+                            {flag.team
+                                ? `Capturé par ${flag.team.name}`
+                                : 'Non capturé'}
+                            {flag.capturedUntil && ` (Incapturable)`}
+                        </Col>
+                        <Col className="mt-2" xs="auto">
+                            <Button
+                                variant="danger"
+                                size="sm"
+                                onClick={() => deleteFlag(flag)}
+                            >
+                                Supprimer
+                            </Button>
+                        </Col>
+                    </Row>
                 </Popup>
             </Marker>
 
