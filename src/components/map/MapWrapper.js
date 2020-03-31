@@ -7,8 +7,11 @@ import { ForbiddenAreaProvider } from '../../utils/useForbiddenAreas';
 import { PlayerProvider } from '../../utils/usePlayers';
 import { FlagProvider } from '../../utils/useFlags';
 import { MarkerProvider } from '../../utils/useMarkers';
+import { useConfig } from '../../utils/useConfig';
 
-function MapWrapper({ config }) {
+function MapWrapper() {
+    const { config } = useConfig();
+
     return (
         <>
             {config.willLaunchAt && !config.launched && (

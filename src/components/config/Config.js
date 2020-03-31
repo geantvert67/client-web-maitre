@@ -3,8 +3,11 @@ import { Container, Row, Col } from 'react-bootstrap';
 import TeamsList from '../teams/TeamsList';
 import ConfigLauncher from './ConfigLauncher';
 import ConfigVisibility from './ConfigVisibility';
+import { useConfig } from '../../utils/useConfig';
 
-function Config({ config }) {
+function Config() {
+    const { config } = useConfig();
+
     return (
         <Container className="mt-5 mb-5">
             <Row>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Marker, Popup } from 'react-leaflet';
+import { Marker, Popup, Circle } from 'react-leaflet';
 import {
     iconForbiddenArea,
     iconGameArea,
@@ -8,6 +8,7 @@ import {
     iconMarkerNegative,
     iconMarkerPositive,
 } from '../../utils/icons';
+import { useConfig } from '../../utils/useConfig';
 
 export function GameAreaMarker({ position }) {
     return <Marker position={position} icon={iconGameArea}></Marker>;
@@ -31,15 +32,25 @@ export function PlayerMarker({ player }) {
 
 export function FlagMarker({ flag }) {
     const color = flag.team ? flag.team.color : 'grey';
+    const { config } = useConfig();
 
     return (
-        <Marker position={flag.coordinates} icon={iconFlag(color)}>
-            <Popup>
-                {flag.team ? `Capturé par ${flag.team.name}` : 'Non capturé'}
-                <br />
-                {flag.capturedUntil && `Incapturable`}
-            </Popup>
-        </Marker>
+        <>
+            <Marker position={flag.coordinates} icon={iconFlag(color)}>
+                <Popup>
+                    {flag.team
+                        ? `Capturé par ${flag.team.name}`
+                        : 'Non capturé'}
+                    <br />
+                    {flag.capturedUntil && `Incapturable`}
+                </Popup>
+            </Marker>
+
+            <Circle
+                center={flag.coordinates}
+                radius={config.flagVisibilityRadius}
+            />
+        </>
     );
 }
 
