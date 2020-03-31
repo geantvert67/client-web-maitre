@@ -47,7 +47,7 @@ function Map() {
     }, [gameAreas]);
 
     return (
-        <LeafletMap className="map" center={position} zoom={17}>
+        <LeafletMap className="map" center={position} zoom={17} minZoom={5}>
             <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
 
             {gameAreas.map((area) => (
