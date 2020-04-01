@@ -6,7 +6,7 @@ import { useSocket } from '../../utils/useSocket';
 function ConfigLauncher() {
     const { socket } = useSocket();
     const [date, setDate] = useState(
-        moment().add(1, 'h').format('YYYY-MM-DTHH:00')
+        moment().add(1, 'h').format('YYYY-MM-DDTHH:00')
     );
 
     const launchGameAt = () => {
