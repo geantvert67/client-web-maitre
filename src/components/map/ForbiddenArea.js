@@ -1,6 +1,6 @@
 import React from 'react';
 import { Polygon } from 'react-leaflet';
-import { GameAreaMarker } from './Markers';
+import { ForbiddenAreaMarker } from './Markers';
 
 function ForbiddenArea({ area }) {
     return (
@@ -8,7 +8,11 @@ function ForbiddenArea({ area }) {
             <Polygon color="red" positions={area.coordinates[0]}></Polygon>
 
             {area.coordinates[0].map((point, index) => (
-                <GameAreaMarker key={index} position={point} />
+                <ForbiddenAreaMarker
+                    key={index}
+                    position={point}
+                    areaId={area.id}
+                />
             ))}
         </>
     );

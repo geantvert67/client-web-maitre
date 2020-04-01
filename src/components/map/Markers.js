@@ -14,6 +14,7 @@ import { deserializeDragend } from '../../utils/map';
 import { useMarkers } from '../../utils/useMarkers';
 import { Button, Row, Col } from 'react-bootstrap';
 import { useGameAreas } from '../../utils/useGameAreas';
+import { useForbiddenAreas } from '../../utils/useForbiddenAreas';
 
 export function GameAreaMarker({ position }) {
     const { moveGameArea } = useGameAreas();
@@ -28,8 +29,19 @@ export function GameAreaMarker({ position }) {
     );
 }
 
-export function ForbiddenAreaMarker({ position }) {
-    return <Marker position={position} icon={iconForbiddenArea}></Marker>;
+export function ForbiddenAreaMarker({ position, areaId }) {
+    const { moveForbiddenArea } = useForbiddenAreas();
+
+    return (
+        <Marker
+            draggable
+            ondragend={(e) =>
+                moveForbiddenArea(deserializeDragend(e), position, areaId)
+            }
+            position={position}
+            icon={iconForbiddenArea}
+        ></Marker>
+    );
 }
 
 export function PlayerMarker({ player }) {
