@@ -1,20 +1,20 @@
 import L from 'leaflet';
 
 export const iconGameArea = new L.Icon({
-    iconUrl: require('../icons/gameArea.gif'),
-    iconRetinaUrl: require('../icons/gameArea.gif'),
-    iconAnchor: [25, 58],
+    iconUrl: require('../icons/zone.png'),
+    iconRetinaUrl: require('../icons/zone.png'),
+    iconAnchor: [6, 43],
     popupAnchor: [0, 10],
-    iconSize: new L.Point(60, 60),
+    iconSize: new L.Point(13, 43),
     className: 'leaflet-div-icon',
 });
 
 export const iconForbiddenArea = new L.Icon({
-    iconUrl: require('../icons/gameArea.gif'),
-    iconRetinaUrl: require('../icons/gameArea.gif'),
-    iconAnchor: [25, 58],
+    iconUrl: require('../icons/zone.png'),
+    iconRetinaUrl: require('../icons/zone.png'),
+    iconAnchor: [6, 43],
     popupAnchor: [0, 10],
-    iconSize: new L.Point(60, 60),
+    iconSize: new L.Point(13, 43),
     className: 'leaflet-div-icon',
 });
 
