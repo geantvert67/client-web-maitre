@@ -1,4 +1,5 @@
 import { isPointInPolygon } from 'geolib';
+import _ from 'lodash';
 import { getDistance } from './geo';
 
 export const deserializePoint = (point) => {
@@ -8,6 +9,13 @@ export const deserializePoint = (point) => {
 export const deserializeDragend = (e) => {
     const c = e.target.getLatLng();
     return [c.lat, c.lng];
+};
+
+export const formatAreas = (areas) => {
+    return areas.map((a) => ({
+        ...a,
+        ...{ coordinates: [_.uniqBy(a.coordinates[0], (c) => c[0] && c[1])] },
+    }));
 };
 
 export const isInForbiddenAreas = (coordinates, forbiddenAreas) => {

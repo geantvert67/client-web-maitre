@@ -9,6 +9,7 @@
         "bootstrap": "^4.4.1",
         "geolib": "^3.2.1",
         "leaflet": "^1.6.0",
+        "lodash": "^4.17.15",
         "moment": "^2.24.0",
         "react": "^16.13.1",
         "react-bootstrap": "^1.0.0",

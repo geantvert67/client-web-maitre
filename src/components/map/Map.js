@@ -4,7 +4,12 @@ import { getCenterOfBounds } from 'geolib';
 import { useSocket } from '../../utils/useSocket';
 import { useGameAreas } from '../../utils/useGameAreas';
 import GameArea from './GameArea';
-import { deserializePoint } from '../../utils/map';
+import {
+    deserializePoint,
+    formatAreas,
+    isInForbiddenAreas,
+    isInGameAreas,
+} from '../../utils/map';
 import { useForbiddenAreas } from '../../utils/useForbiddenAreas';
 import ForbiddenArea from './ForbiddenArea';
 import { usePlayers } from '../../utils/usePlayers';
@@ -14,17 +19,17 @@ import { useMarkers } from '../../utils/useMarkers';
 
 function Map() {
     const { socket } = useSocket();
-    const [position, setPosition] = useState([47.736544, 7.286776]);
+    const [position, setPosition] = useState(null);
     const { gameAreas, setGameAreas } = useGameAreas();
     const { forbiddenAreas, setForbiddenAreas } = useForbiddenAreas();
     const { players, setPlayers } = usePlayers();
-    const { flags, setFlags } = useFlags();
+    const { flags, setFlags, deleteFlag } = useFlags();
     const { markers, setMarkers } = useMarkers();
 
     useEffect(() => {
         socket.on('getAreas', (a) => {
-            setGameAreas(a.filter((a) => !a.forbidden));
-            setForbiddenAreas(a.filter((a) => a.forbidden));
+            setGameAreas(formatAreas(a.filter((a) => !a.forbidden)));
+            setForbiddenAreas(formatAreas(a.filter((a) => a.forbidden)));
         });
         socket.emit('getAreas');
 
@@ -39,15 +44,35 @@ function Map() {
     }, []);
 
     useEffect(() => {
-        if (gameAreas.length > 0) {
+        if (gameAreas.length > 0 && !position) {
             setPosition(
                 deserializePoint(getCenterOfBounds(gameAreas[0].coordinates[0]))
             );
         }
     }, [gameAreas]);
 
+    useEffect(() => {
+        checkFlags();
+    }, [gameAreas, forbiddenAreas]);
+
+    const checkFlags = () => {
+        flags.forEach((flag) => {
+            if (
+                isInForbiddenAreas(flag.coordinates, forbiddenAreas) ||
+                !isInGameAreas(flag.coordinates, gameAreas)
+            ) {
+                deleteFlag(flag);
+            }
+        });
+    };
+
     return (
-        <LeafletMap className="map" center={position} zoom={17} minZoom={5}>
+        <LeafletMap
+            className="map"
+            center={position || [47.736544, 7.286776]}
+            zoom={17}
+            minZoom={5}
+        >
             <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
 
             {gameAreas.map((area) => (
