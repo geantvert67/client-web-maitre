@@ -8,7 +8,7 @@ function GameArea({ area }) {
             <Polygon color="green" positions={area.coordinates[0]}></Polygon>
 
             {area.coordinates[0].map((point, index) => (
-                <GameAreaMarker key={index} position={point} />
+                <GameAreaMarker key={index} position={point} areaId={area.id} />
             ))}
         </>
     );

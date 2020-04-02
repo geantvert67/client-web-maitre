@@ -16,8 +16,9 @@ import { Button, Row, Col } from 'react-bootstrap';
 import { useGameAreas } from '../../utils/useGameAreas';
 import { useForbiddenAreas } from '../../utils/useForbiddenAreas';
 
-export function GameAreaMarker({ position }) {
-    const { moveGameArea } = useGameAreas();
+export function GameAreaMarker({ position, areaId }) {
+    const { moveGameArea, deleteGameAreaPoint } = useGameAreas();
+    const popup = useRef(null);
 
     return (
         <Marker
@@ -25,7 +26,20 @@ export function GameAreaMarker({ position }) {
             ondragend={(e) => moveGameArea(deserializeDragend(e), position)}
             position={position}
             icon={iconGameArea}
-        ></Marker>
+        >
+            <Popup ref={popup}>
+                <Button
+                    variant="danger"
+                    size="sm"
+                    onClick={() => {
+                        popup.current.leafletElement.options.leaflet.map.closePopup();
+                        deleteGameAreaPoint(position, areaId);
+                    }}
+                >
+                    Supprimer
+                </Button>
+            </Popup>
+        </Marker>
     );
 }
 

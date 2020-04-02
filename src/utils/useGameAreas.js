@@ -23,9 +23,28 @@ export const GameAreaProvider = ({ children }) => {
         });
     };
 
+    const deleteGameAreaPoint = (point, areaId) => {
+        const newGA = _.cloneDeep(gameAreas);
+        const pos = _.findIndex(newGA, (a) => a.id === areaId);
+        _.remove(
+            newGA[pos].coordinates[0],
+            (c) => c[0] === point[0] && c[1] === point[1]
+        );
+        setGameAreas(newGA);
+        socket.emit('moveArea', {
+            coordinates: newGA[pos].coordinates,
+            areaId,
+        });
+    };
+
     return (
         <GameAreaContext.Provider
-            value={{ gameAreas, setGameAreas, moveGameArea }}
+            value={{
+                gameAreas,
+                setGameAreas,
+                moveGameArea,
+                deleteGameAreaPoint,
+            }}
         >
             {children}
         </GameAreaContext.Provider>
