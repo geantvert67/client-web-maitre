@@ -23,9 +23,28 @@ export const ForbiddenAreaProvider = ({ children }) => {
         });
     };
 
+    const deleteForbiddenAreaPoint = (point, areaId) => {
+        const newFA = _.cloneDeep(forbiddenAreas);
+        const pos = _.findIndex(newFA, (a) => a.id === areaId);
+        _.remove(
+            newFA[pos].coordinates[0],
+            (c) => c[0] === point[0] && c[1] === point[1]
+        );
+        setForbiddenAreas(newFA);
+        socket.emit('moveArea', {
+            coordinates: newFA[pos].coordinates,
+            areaId,
+        });
+    };
+
     return (
         <ForbiddenAreaContext.Provider
-            value={{ forbiddenAreas, setForbiddenAreas, moveForbiddenArea }}
+            value={{
+                forbiddenAreas,
+                setForbiddenAreas,
+                moveForbiddenArea,
+                deleteForbiddenAreaPoint,
+            }}
         >
             {children}
         </ForbiddenAreaContext.Provider>

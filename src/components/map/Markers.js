@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Marker, Popup, Circle } from 'react-leaflet';
 import {
     iconForbiddenArea,
@@ -30,7 +30,8 @@ export function GameAreaMarker({ position }) {
 }
 
 export function ForbiddenAreaMarker({ position, areaId }) {
-    const { moveForbiddenArea } = useForbiddenAreas();
+    const { moveForbiddenArea, deleteForbiddenAreaPoint } = useForbiddenAreas();
+    const popup = useRef(null);
 
     return (
         <Marker
@@ -40,7 +41,20 @@ export function ForbiddenAreaMarker({ position, areaId }) {
             }
             position={position}
             icon={iconForbiddenArea}
-        ></Marker>
+        >
+            <Popup ref={popup}>
+                <Button
+                    variant="danger"
+                    size="sm"
+                    onClick={() => {
+                        popup.current.leafletElement.options.leaflet.map.closePopup();
+                        deleteForbiddenAreaPoint(position, areaId);
+                    }}
+                >
+                    Supprimer
+                </Button>
+            </Popup>
+        </Marker>
     );
 }
 
