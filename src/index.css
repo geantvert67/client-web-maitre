@@ -23,6 +23,25 @@ body {
     z-index: 998 !important;
 }
 
+.modal-header {
+    border: none !important;
+}
+
+.modal-content {
+    background-color: #1b1e22 !important;
+}
+
+.modal-footer {
+    border-color: #26292f !important;
+}
+
+.btn-toast {
+    position: absolute !important;
+    bottom: 2rem !important;
+    right: 2rem !important;
+    z-index: 998 !important;
+}
+
 .btn-success {
     border-color: #68b684 !important;
     background-color: #68b684 !important;
@@ -63,6 +82,14 @@ input[type]:focus,
     width: 50px;
     border-radius: 4px;
     box-shadow: 0px 1px 3px #1b1e22;
+}
+
+.table {
+    color: white !important;
+}
+
+th {
+    text-align: center !important;
 }
 
 .map {
