@@ -16,6 +16,7 @@ import { usePlayers } from '../../utils/usePlayers';
 import { PlayerMarker, FlagMarker, MarkerMarker } from './Markers';
 import { useFlags } from '../../utils/useFlags';
 import { useMarkers } from '../../utils/useMarkers';
+import { useTeams } from '../../utils/useTeams';
 
 function Map() {
     const { socket } = useSocket();
@@ -25,6 +26,7 @@ function Map() {
     const { players, setPlayers } = usePlayers();
     const { flags, setFlags, deleteFlag } = useFlags();
     const { markers, setMarkers } = useMarkers();
+    const { setTeams } = useTeams();
 
     useEffect(() => {
         socket.on('getAreas', (a) => {
@@ -37,6 +39,7 @@ function Map() {
             setPlayers(o.players);
             setFlags(o.flags);
             setMarkers(o.markers);
+            setTeams(o.teams);
         });
         const interval = setInterval(() => socket.emit('adminRoutine'), 3000);
 
