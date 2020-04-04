@@ -30,8 +30,8 @@ function TeamsList({ maxPlayers }) {
                                 </Card.Title>
                             </Col>
                             <Col xs="auto">
-                                {maxPlayers &&
-                                    `${team.players.length} / ${maxPlayers}`}
+                                {team.players.length} /{' '}
+                                {maxPlayers ? maxPlayers : '∞'}
                             </Col>
                         </Row>
                     </Card.Body>

@@ -42,6 +42,13 @@ body {
     z-index: 998 !important;
 }
 
+.btn-toast-left {
+    position: absolute !important;
+    top: 2rem !important;
+    left: 2rem !important;
+    z-index: 998 !important;
+}
+
 .btn-success {
     border-color: #68b684 !important;
     background-color: #68b684 !important;

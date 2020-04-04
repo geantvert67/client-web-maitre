@@ -11,17 +11,29 @@ import { TeamProvider } from '../../utils/useTeams';
 import { useConfig } from '../../utils/useConfig';
 import Score from './Score';
 
-function MapWrapper() {
+function MapWrapper({ setShowMap }) {
     const { config } = useConfig();
     const [showScore, setShowScore] = useState(false);
 
     return (
         <TeamProvider>
             {config.willLaunchAt && !config.launched && (
-                <Alert className="alert-toast" variant="success">
-                    La partie va démarrer le{' '}
-                    {moment(config.willLaunchAt).format('D/MM/YYYY à HH:00')}
-                </Alert>
+                <>
+                    <Alert className="alert-toast" variant="success">
+                        La partie va démarrer le{' '}
+                        {moment(config.willLaunchAt).format(
+                            'DD/MM/YYYY à HH:00'
+                        )}
+                    </Alert>
+
+                    <Button
+                        onClick={() => setShowMap(false)}
+                        className="btn-toast-left"
+                        variant="light"
+                    >
+                        Retour
+                    </Button>
+                </>
             )}
 
             <GameAreaProvider>
