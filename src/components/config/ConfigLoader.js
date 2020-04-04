@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSocket } from '../../utils/useSocket';
 import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import Config from './Config';

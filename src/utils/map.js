@@ -36,7 +36,7 @@ export const isInGameAreas = (coordinates, gameAreas) => {
 
 export const isFlagInConflict = (coordinates, flags, radius) => {
     let conflict = false;
-    flags.map((f) => {
+    flags.forEach((f) => {
         getDistance(coordinates, f.coordinates) < radius * 2 &&
             (conflict = true);
     });
