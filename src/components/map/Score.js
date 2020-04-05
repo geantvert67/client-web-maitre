@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Table } from 'react-bootstrap';
+import { Modal, Table, Row, Col } from 'react-bootstrap';
 import { useTeams } from '../../utils/useTeams';
 
 function Score({ showScore, setShowScore }) {
@@ -9,7 +9,7 @@ function Score({ showScore, setShowScore }) {
         <Modal show={showScore} onHide={() => setShowScore(false)} centered>
             <Modal.Body>
                 {teams && teams.length > 0 ? (
-                    <Table borderless>
+                    <Table className="mb-0" borderless responsive>
                         <thead>
                             <tr>
                                 <th>Équipe</th>
@@ -18,7 +18,7 @@ function Score({ showScore, setShowScore }) {
                         </thead>
                         <tbody>
                             {teams.map((team) => (
-                                <ScoreItem team={team} />
+                                <ScoreItem key={team.id} team={team} />
                             ))}
                         </tbody>
                     </Table>
@@ -33,7 +33,17 @@ function Score({ showScore, setShowScore }) {
 function ScoreItem({ team }) {
     return (
         <tr>
-            <th>{team.name}</th>
+            <th>
+                <Row className="align-items-center justify-content-center">
+                    <Col xs="auto">
+                        <div
+                            className="team-color-small"
+                            style={{ backgroundColor: team.color }}
+                        ></div>
+                    </Col>
+                    <Col xs="auto">{team.name}</Col>
+                </Row>
+            </th>
             <th>{team.nbFlags}</th>
         </tr>
     );

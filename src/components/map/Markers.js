@@ -95,7 +95,11 @@ export function FlagMarker({ flag }) {
                 position={flag.coordinates}
                 icon={iconFlag(color)}
                 draggable
-                ondragend={(e) => moveFlag(deserializeDragend(e), flag)}
+                ondragstart={() => localStorage.setItem('moving', 1)}
+                ondragend={(e) => {
+                    moveFlag(deserializeDragend(e), flag);
+                    localStorage.removeItem('moving');
+                }}
             >
                 <Popup>
                     <Row className="justify-content-center">
@@ -139,7 +143,11 @@ export function MarkerMarker({ marker }) {
                     : iconMarkerNegative(color)
             }
             draggable
-            ondragend={(e) => moveMarker(deserializeDragend(e), marker)}
+            ondragstart={() => localStorage.setItem('moving', 1)}
+            ondragend={(e) => {
+                moveMarker(deserializeDragend(e), marker);
+                localStorage.removeItem('moving');
+            }}
         >
             <Popup>
                 <Row className="justify-content-center">

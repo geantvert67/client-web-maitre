@@ -4,8 +4,9 @@ import TeamsList from '../teams/TeamsList';
 import ConfigLauncher from './ConfigLauncher';
 import ConfigVisibility from './ConfigVisibility';
 import { useConfig } from '../../utils/useConfig';
+import InvitationsList from '../invitations/InvitationsList';
 
-function Config() {
+function Config({ setShowMap }) {
     const { config } = useConfig();
 
     return (
@@ -18,7 +19,14 @@ function Config() {
                     <ConfigVisibility published={config.published} />
 
                     <h5 className="mt-5 mb-4">Lancement</h5>
-                    <ConfigLauncher />
+                    <ConfigLauncher
+                        launched={config.launched}
+                        planned={config.willLaunchAt}
+                        setShowMap={setShowMap}
+                    />
+
+                    <h5 className="mt-5 mb-4">Demandes</h5>
+                    <InvitationsList />
 
                     <h5 className="mt-5 mb-4">Équipes</h5>
                     <TeamsList maxPlayers={config.maxPlayers} />

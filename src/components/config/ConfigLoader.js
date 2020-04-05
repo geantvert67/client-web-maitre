@@ -8,6 +8,7 @@ import { useConfig } from '../../utils/useConfig';
 function ConfigLoader() {
     const { socket } = useSocket();
     const { config, setConfig } = useConfig();
+    const [showMap, setShowMap] = useState(true);
 
     useEffect(() => {
         socket.on('getConfig', (c) => setConfig(c));
@@ -15,10 +16,10 @@ function ConfigLoader() {
     }, []);
 
     return config ? (
-        config.launched || config.willLaunchAt ? (
-            <MapWrapper />
+        (config.launched || config.willLaunchAt) && showMap ? (
+            <MapWrapper setShowMap={setShowMap} />
         ) : (
-            <Config />
+            <Config setShowMap={setShowMap} />
         )
     ) : (
         <Container className="mt-5 mb-5">

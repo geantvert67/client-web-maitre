@@ -42,6 +42,13 @@ body {
     z-index: 998 !important;
 }
 
+.btn-toast-left {
+    position: absolute !important;
+    top: 2rem !important;
+    left: 2rem !important;
+    z-index: 998 !important;
+}
+
 .btn-success {
     border-color: #68b684 !important;
     background-color: #68b684 !important;
@@ -84,12 +91,24 @@ input[type]:focus,
     box-shadow: 0px 1px 3px #1b1e22;
 }
 
+.team-color-small {
+    height: 25px;
+    width: 25px;
+    border-radius: 4px;
+    box-shadow: 0px 1px 3px #1b1e22;
+}
+
 .table {
     color: white !important;
 }
 
 th {
     text-align: center !important;
+    font-weight: initial !important;
+}
+
+thead > tr > th {
+    font-weight: bold !important;
 }
 
 .map {
@@ -111,4 +130,10 @@ th {
 .leaflet-popup-tip {
     background-color: #26292f !important;
     color: white;
+}
+
+@media (min-width: 768px) {
+    .modal-dialog {
+        max-width: 700px !important;
+    }
 }

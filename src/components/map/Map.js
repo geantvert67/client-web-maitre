@@ -12,18 +12,17 @@ import {
 } from '../../utils/map';
 import { useForbiddenAreas } from '../../utils/useForbiddenAreas';
 import ForbiddenArea from './ForbiddenArea';
-import { usePlayers } from '../../utils/usePlayers';
-import { PlayerMarker, FlagMarker, MarkerMarker } from './Markers';
+import { FlagMarker, MarkerMarker } from './Markers';
 import { useFlags } from '../../utils/useFlags';
 import { useMarkers } from '../../utils/useMarkers';
 import { useTeams } from '../../utils/useTeams';
+import PlayerList from './PlayerList';
 
 function Map() {
     const { socket } = useSocket();
     const [position, setPosition] = useState(null);
     const { gameAreas, setGameAreas } = useGameAreas();
     const { forbiddenAreas, setForbiddenAreas } = useForbiddenAreas();
-    const { players, setPlayers } = usePlayers();
     const { flags, setFlags, deleteFlag } = useFlags();
     const { markers, setMarkers } = useMarkers();
     const { setTeams } = useTeams();
@@ -36,12 +35,14 @@ function Map() {
         socket.emit('getAreas');
 
         socket.on('adminRoutine', (o) => {
-            setPlayers(o.players);
-            setFlags(o.flags);
-            setMarkers(o.markers);
-            setTeams(o.teams);
+            if (!localStorage.getItem('moving')) {
+                setMarkers(o.markers);
+                setFlags(o.flags);
+                setTeams(o.teams);
+            }
         });
-        const interval = setInterval(() => socket.emit('adminRoutine'), 3000);
+        const interval = setInterval(() => socket.emit('adminRoutine'), 1000);
+        localStorage.removeItem('moving');
 
         return () => clearInterval(interval);
     }, []);
@@ -86,11 +87,7 @@ function Map() {
                 <ForbiddenArea key={area.id} area={area} />
             ))}
 
-            {players
-                .filter((p) => p.coordinates.length > 0)
-                .map((player) => (
-                    <PlayerMarker key={player.username} player={player} />
-                ))}
+            <PlayerList />
 
             {flags.map((flag) => (
                 <FlagMarker key={flag.id} flag={flag} />
