@@ -1,5 +1,36 @@
 import L from 'leaflet';
 
+export const getItemIcon = (name) => {
+    switch (name) {
+        case 'Sentinelle':
+            return iconSentinelle;
+        case 'Canon à photons':
+            return iconCanonPhotons;
+        case 'Antenne':
+            return iconAntenne;
+        case 'Sonde':
+            return iconSonde;
+        case 'Portail de transfert':
+            return iconPortail;
+        case 'Disloqueur':
+            return iconDisloqueur;
+        case 'Intercepteur':
+            return iconIntercepteur;
+        case 'Noyau protecteur':
+            return iconNoyau;
+        case 'Oracle':
+            return iconOracle;
+        case 'Tempête':
+            return iconTempete;
+        case 'Transducteur':
+            return iconTransducteur;
+        case 'Transporteur':
+            return iconTransporteur;
+        default:
+            return iconGameArea;
+    }
+};
+
 export const iconGameArea = new L.Icon({
     iconUrl: require('../icons/zone.png'),
     iconRetinaUrl: require('../icons/zone.png'),
@@ -51,3 +82,111 @@ export const iconMarkerNegative = (color) =>
         popupAnchor: [0, -25],
         html: `<svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill=${color} d="M192 0C86.4 0 0 86.4 0 192c0 76.8 25.6 99.2 172.8 310.4 9.6 12.8 28.8 12.8 38.4 0C358.4 291.2 384 268.8 384 192 384 86.4 297.6 0 192 0zm112 200c0 8.84-7.16 16-16 16H96c-8.84 0-16-7.16-16-16v-16c0-8.84 7.16-16 16-16h192c8.84 0 16 7.16 16 16v16z"></path></svg>`,
     });
+
+export const iconTransporteur = new L.Icon({
+    iconUrl: require('../icons/transporteur.png'),
+    iconRetinaUrl: require('../icons/transporteur.png'),
+    iconAnchor: [25, 50],
+    popupAnchor: [0, -40],
+    iconSize: new L.Point(50, 50),
+    className: 'leaflet-div-icon',
+});
+
+export const iconTransducteur = new L.Icon({
+    iconUrl: require('../icons/transducteur.gif'),
+    iconRetinaUrl: require('../icons/transducteur.gif'),
+    iconAnchor: [17, 39],
+    popupAnchor: [0, 0],
+    iconSize: new L.Point(35, 39),
+    className: 'leaflet-div-icon',
+});
+
+export const iconTempete = new L.Icon({
+    iconUrl: require('../icons/tempete.png'),
+    iconRetinaUrl: require('../icons/tempete.png'),
+    iconAnchor: [33, 64],
+    popupAnchor: [-10, -55],
+    iconSize: new L.Point(47, 66),
+    className: 'leaflet-div-icon',
+});
+
+export const iconOracle = new L.Icon({
+    iconUrl: require('../icons/oracle.png'),
+    iconRetinaUrl: require('../icons/oracle.png'),
+    iconAnchor: [21, 59],
+    popupAnchor: [0, -50],
+    iconSize: new L.Point(42, 59),
+    className: 'leaflet-div-icon',
+});
+
+export const iconNoyau = new L.Icon({
+    iconUrl: require('../icons/noyau.png'),
+    iconRetinaUrl: require('../icons/noyau.png'),
+    iconAnchor: [17, 18],
+    popupAnchor: [0, -10],
+    iconSize: new L.Point(34, 36),
+    className: 'leaflet-div-icon',
+});
+
+export const iconCanonPhotons = new L.Icon({
+    iconUrl: require('../icons/canonPhotons.gif'),
+    iconRetinaUrl: require('../icons/canonPhotons.gif'),
+    iconAnchor: [11, 33],
+    popupAnchor: [0, -30],
+    iconSize: new L.Point(22, 33),
+    className: 'leaflet-div-icon',
+});
+
+export const iconAntenne = new L.Icon({
+    iconUrl: require('../icons/antenne.png'),
+    iconRetinaUrl: require('../icons/antenne.png'),
+    iconAnchor: [14, 47],
+    popupAnchor: [0, -40],
+    iconSize: new L.Point(28, 47),
+    className: 'leaflet-div-icon',
+});
+
+export const iconDisloqueur = new L.Icon({
+    iconUrl: require('../icons/disloqueur.png'),
+    iconRetinaUrl: require('../icons/disloqueur.png'),
+    iconAnchor: [32, 64],
+    popupAnchor: [0, -55],
+    iconSize: new L.Point(64, 64),
+    className: 'leaflet-div-icon',
+});
+
+export const iconIntercepteur = new L.Icon({
+    iconUrl: require('../icons/intercepteur.gif'),
+    iconRetinaUrl: require('../icons/intercepteur.gif'),
+    iconAnchor: [23, 14],
+    popupAnchor: [0, -5],
+    iconSize: new L.Point(46, 28),
+    className: 'leaflet-div-icon',
+});
+
+export const iconPortail = new L.Icon({
+    iconUrl: require('../icons/portail.png'),
+    iconRetinaUrl: require('../icons/portail.png'),
+    iconAnchor: [12, 48],
+    popupAnchor: [0, -45],
+    iconSize: new L.Point(24, 48),
+    className: 'leaflet-div-icon',
+});
+
+export const iconSentinelle = new L.Icon({
+    iconUrl: require('../icons/sentinelle.png'),
+    iconRetinaUrl: require('../icons/sentinelle.png'),
+    iconAnchor: [9, 10],
+    popupAnchor: [0, -5],
+    iconSize: new L.Point(18, 20),
+    className: 'leaflet-div-icon',
+});
+
+export const iconSonde = new L.Icon({
+    iconUrl: require('../icons/sonde.png'),
+    iconRetinaUrl: require('../icons/sonde.png'),
+    iconAnchor: [26, 36],
+    popupAnchor: [0, -25],
+    iconSize: new L.Point(52, 36),
+    className: 'leaflet-div-icon',
+});

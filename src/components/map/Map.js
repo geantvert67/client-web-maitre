@@ -12,11 +12,12 @@ import {
 } from '../../utils/map';
 import { useForbiddenAreas } from '../../utils/useForbiddenAreas';
 import ForbiddenArea from './ForbiddenArea';
-import { FlagMarker, MarkerMarker } from './Markers';
+import { FlagMarker, MarkerMarker, ItemMarker } from './Markers';
 import { useFlags } from '../../utils/useFlags';
 import { useMarkers } from '../../utils/useMarkers';
 import { useTeams } from '../../utils/useTeams';
 import PlayerList from './PlayerList';
+import { useItems } from '../../utils/useItems';
 
 function Map() {
     const { socket } = useSocket();
@@ -26,6 +27,7 @@ function Map() {
     const { flags, setFlags, deleteFlag } = useFlags();
     const { markers, setMarkers } = useMarkers();
     const { setTeams } = useTeams();
+    const { items, setItems } = useItems();
 
     useEffect(() => {
         socket.on('getAreas', (a) => {
@@ -38,6 +40,7 @@ function Map() {
             if (!localStorage.getItem('moving')) {
                 setMarkers(o.markers);
                 setFlags(o.flags);
+                setItems(o.items);
                 setTeams(o.teams);
             }
         });
@@ -95,6 +98,10 @@ function Map() {
 
             {markers.map((marker) => (
                 <MarkerMarker key={marker.id} marker={marker} />
+            ))}
+
+            {items.map((item) => (
+                <ItemMarker key={item.id} item={item} />
             ))}
         </LeafletMap>
     );

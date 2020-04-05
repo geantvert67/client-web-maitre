@@ -7,6 +7,7 @@ import {
     iconFlag,
     iconMarkerNegative,
     iconMarkerPositive,
+    getItemIcon,
 } from '../../utils/icons';
 import { useConfig } from '../../utils/useConfig';
 import { useFlags } from '../../utils/useFlags';
@@ -167,6 +168,16 @@ export function MarkerMarker({ marker }) {
                     </Col>
                 </Row>
             </Popup>
+        </Marker>
+    );
+}
+
+export function ItemMarker({ item }) {
+    const icon = getItemIcon(item.itemModel.name);
+
+    return (
+        <Marker icon={icon} position={item.coordinates}>
+            <Popup>{item.itemModel.name}</Popup>
         </Marker>
     );
 }

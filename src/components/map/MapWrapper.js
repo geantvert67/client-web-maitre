@@ -10,6 +10,7 @@ import { MarkerProvider } from '../../utils/useMarkers';
 import { TeamProvider } from '../../utils/useTeams';
 import { useConfig } from '../../utils/useConfig';
 import Score from './Score';
+import { ItemProvider } from '../../utils/useItems';
 
 function MapWrapper({ setShowMap }) {
     const { config } = useConfig();
@@ -41,7 +42,9 @@ function MapWrapper({ setShowMap }) {
                     <PlayerProvider>
                         <FlagProvider>
                             <MarkerProvider>
-                                <Map />
+                                <ItemProvider>
+                                    <Map />
+                                </ItemProvider>
                             </MarkerProvider>
                         </FlagProvider>
                     </PlayerProvider>
