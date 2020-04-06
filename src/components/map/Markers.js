@@ -16,6 +16,7 @@ import { useMarkers } from '../../utils/useMarkers';
 import { Button, Row, Col } from 'react-bootstrap';
 import { useGameAreas } from '../../utils/useGameAreas';
 import { useForbiddenAreas } from '../../utils/useForbiddenAreas';
+import { useItems } from '../../utils/useItems';
 
 export function GameAreaMarker({ position, areaId }) {
     const { moveGameArea, deleteGameAreaPoint } = useGameAreas();
@@ -174,10 +175,24 @@ export function MarkerMarker({ marker }) {
 
 export function ItemMarker({ item }) {
     const icon = getItemIcon(item.itemModel.name);
+    const { deleteItem } = useItems();
 
     return (
         <Marker icon={icon} position={item.coordinates}>
-            <Popup>{item.itemModel.name}</Popup>
+            <Popup>
+                <Row className="justify-content-center">
+                    <Col xs="12">{item.itemModel.name}</Col>
+                    <Col className="mt-2" xs="auto">
+                        <Button
+                            variant="danger"
+                            size="sm"
+                            onClick={() => deleteItem(item)}
+                        >
+                            Supprimer
+                        </Button>
+                    </Col>
+                </Row>
+            </Popup>
         </Marker>
     );
 }
