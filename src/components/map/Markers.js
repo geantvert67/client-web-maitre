@@ -175,10 +175,19 @@ export function MarkerMarker({ marker }) {
 
 export function ItemMarker({ item }) {
     const icon = getItemIcon(item.itemModel.name);
-    const { deleteItem } = useItems();
+    const { moveItem, deleteItem } = useItems();
 
     return (
-        <Marker icon={icon} position={item.coordinates}>
+        <Marker
+            icon={icon}
+            position={item.coordinates}
+            draggable
+            ondragstart={() => localStorage.setItem('moving', 1)}
+            ondragend={(e) => {
+                moveItem(deserializeDragend(e), item);
+                localStorage.removeItem('moving');
+            }}
+        >
             <Popup>
                 <Row className="justify-content-center">
                     <Col xs="12">{item.itemModel.name}</Col>
