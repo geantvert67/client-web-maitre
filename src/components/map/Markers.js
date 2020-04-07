@@ -127,6 +127,13 @@ export function FlagMarker({ flag }) {
             <Circle
                 center={flag.coordinates}
                 radius={config.flagVisibilityRadius}
+                stroke={false}
+            />
+
+            <Circle
+                center={flag.coordinates}
+                radius={config.flagActionRadius}
+                stroke={false}
             />
         </>
     );

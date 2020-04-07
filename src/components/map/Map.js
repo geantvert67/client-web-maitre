@@ -21,6 +21,7 @@ import { useItems } from '../../utils/useItems';
 
 function Map() {
     const { socket } = useSocket();
+    const [zoom, setZoom] = useState(17);
     const [position, setPosition] = useState(null);
     const { gameAreas, setGameAreas } = useGameAreas();
     const { forbiddenAreas, setForbiddenAreas } = useForbiddenAreas();
@@ -77,8 +78,9 @@ function Map() {
         <LeafletMap
             className="map"
             center={position || [47.736544, 7.286776]}
-            zoom={17}
+            zoom={zoom}
             minZoom={5}
+            maxZoom={25}
         >
             <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
 
