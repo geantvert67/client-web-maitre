@@ -13,10 +13,11 @@ import { useConfig } from '../../utils/useConfig';
 import { useFlags } from '../../utils/useFlags';
 import { deserializeDragend } from '../../utils/map';
 import { useMarkers } from '../../utils/useMarkers';
-import { Button, Row, Col } from 'react-bootstrap';
+import { Button, Row, Col, Form } from 'react-bootstrap';
 import { useGameAreas } from '../../utils/useGameAreas';
 import { useForbiddenAreas } from '../../utils/useForbiddenAreas';
 import { useItems } from '../../utils/useItems';
+import { useTeams } from '../../utils/useTeams';
 
 export function GameAreaMarker({ position, areaId }) {
     const { moveGameArea, deleteGameAreaPoint } = useGameAreas();
@@ -89,7 +90,9 @@ export function PlayerMarker({ player }) {
 export function FlagMarker({ flag }) {
     const color = flag.team ? flag.team.color : 'grey';
     const { config } = useConfig();
-    const { moveFlag, deleteFlag } = useFlags();
+    const { moveFlag, deleteFlag, captureFlag } = useFlags();
+    const { teams } = useTeams();
+    const teamInput = useRef(null);
 
     return (
         <>
@@ -110,6 +113,44 @@ export function FlagMarker({ flag }) {
                                 ? `Capturé par ${flag.team.name}`
                                 : 'Non capturé'}
                             {flag.capturedUntil && ` (Incapturable)`}
+                        </Col>
+                        <Col className="mt-2" xs="12">
+                            <Row className="justify-content-center">
+                                <Col xs="auto">
+                                    <Form.Control
+                                        ref={teamInput}
+                                        style={{ width: '200px' }}
+                                        as="select"
+                                    >
+                                        {teams.map((team) => (
+                                            <option
+                                                key={team.id}
+                                                value={team.id}
+                                            >
+                                                {team.name}
+                                            </option>
+                                        ))}
+                                    </Form.Control>
+                                </Col>
+                                <Col
+                                    className="mt-1"
+                                    xs="auto"
+                                    onClick={() =>
+                                        captureFlag(
+                                            flag.id,
+                                            teamInput.current.value
+                                        )
+                                    }
+                                >
+                                    <Button
+                                        disabled={flag.capturedUntil}
+                                        variant="success"
+                                        size="sm"
+                                    >
+                                        Capturer
+                                    </Button>
+                                </Col>
+                            </Row>
                         </Col>
                         <Col className="mt-2" xs="auto">
                             <Button
