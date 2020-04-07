@@ -185,30 +185,44 @@ export function ItemMarker({ item }) {
     const { moveItem, deleteItem } = useItems();
 
     return (
-        <Marker
-            icon={icon}
-            position={item.coordinates}
-            draggable
-            ondragstart={() => localStorage.setItem('moving', 1)}
-            ondragend={(e) => {
-                moveItem(deserializeDragend(e), item);
-                localStorage.removeItem('moving');
-            }}
-        >
-            <Popup>
-                <Row className="justify-content-center">
-                    <Col xs="12">{item.itemModel.name}</Col>
-                    <Col className="mt-2" xs="auto">
-                        <Button
-                            variant="danger"
-                            size="sm"
-                            onClick={() => deleteItem(item)}
-                        >
-                            Supprimer
-                        </Button>
-                    </Col>
-                </Row>
-            </Popup>
-        </Marker>
+        <>
+            <Marker
+                icon={icon}
+                position={item.coordinates}
+                draggable
+                ondragstart={() => localStorage.setItem('moving', 1)}
+                ondragend={(e) => {
+                    moveItem(deserializeDragend(e), item);
+                    localStorage.removeItem('moving');
+                }}
+            >
+                <Popup>
+                    <Row className="justify-content-center">
+                        <Col xs="12">{item.itemModel.name}</Col>
+                        <Col className="mt-2" xs="auto">
+                            <Button
+                                variant="danger"
+                                size="sm"
+                                onClick={() => deleteItem(item)}
+                            >
+                                Supprimer
+                            </Button>
+                        </Col>
+                    </Row>
+                </Popup>
+            </Marker>
+
+            <Circle
+                center={item.coordinates}
+                radius={item.itemModel.visibilityRadius}
+                stroke={false}
+            />
+
+            <Circle
+                center={item.coordinates}
+                radius={item.itemModel.actionRadius}
+                stroke={false}
+            />
+        </>
     );
 }
