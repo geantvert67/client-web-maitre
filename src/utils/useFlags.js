@@ -35,8 +35,14 @@ export const FlagProvider = ({ children }) => {
         socket.emit('deleteFlag', flag.id);
     };
 
+    const captureFlag = (flagId, teamId) => {
+        socket.emit('captureFlag', { flagId, teamId: parseInt(teamId) });
+    };
+
     return (
-        <FlagContext.Provider value={{ flags, setFlags, moveFlag, deleteFlag }}>
+        <FlagContext.Provider
+            value={{ flags, setFlags, moveFlag, deleteFlag, captureFlag }}
+        >
             {children}
         </FlagContext.Provider>
     );

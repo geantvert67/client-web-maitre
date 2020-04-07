@@ -7,14 +7,17 @@ import {
     iconFlag,
     iconMarkerNegative,
     iconMarkerPositive,
+    getItemIcon,
 } from '../../utils/icons';
 import { useConfig } from '../../utils/useConfig';
 import { useFlags } from '../../utils/useFlags';
 import { deserializeDragend } from '../../utils/map';
 import { useMarkers } from '../../utils/useMarkers';
-import { Button, Row, Col } from 'react-bootstrap';
+import { Button, Row, Col, Form } from 'react-bootstrap';
 import { useGameAreas } from '../../utils/useGameAreas';
 import { useForbiddenAreas } from '../../utils/useForbiddenAreas';
+import { useItems } from '../../utils/useItems';
+import { useTeams } from '../../utils/useTeams';
 
 export function GameAreaMarker({ position, areaId }) {
     const { moveGameArea, deleteGameAreaPoint } = useGameAreas();
@@ -87,7 +90,9 @@ export function PlayerMarker({ player }) {
 export function FlagMarker({ flag }) {
     const color = flag.team ? flag.team.color : 'grey';
     const { config } = useConfig();
-    const { moveFlag, deleteFlag } = useFlags();
+    const { moveFlag, deleteFlag, captureFlag } = useFlags();
+    const { teams } = useTeams();
+    const teamInput = useRef(null);
 
     return (
         <>
@@ -109,6 +114,44 @@ export function FlagMarker({ flag }) {
                                 : 'Non capturé'}
                             {flag.capturedUntil && ` (Incapturable)`}
                         </Col>
+                        <Col className="mt-2" xs="12">
+                            <Row className="justify-content-center">
+                                <Col xs="auto">
+                                    <Form.Control
+                                        ref={teamInput}
+                                        style={{ width: '200px' }}
+                                        as="select"
+                                    >
+                                        {teams.map((team) => (
+                                            <option
+                                                key={team.id}
+                                                value={team.id}
+                                            >
+                                                {team.name}
+                                            </option>
+                                        ))}
+                                    </Form.Control>
+                                </Col>
+                                <Col
+                                    className="mt-1"
+                                    xs="auto"
+                                    onClick={() =>
+                                        captureFlag(
+                                            flag.id,
+                                            teamInput.current.value
+                                        )
+                                    }
+                                >
+                                    <Button
+                                        disabled={flag.capturedUntil}
+                                        variant="success"
+                                        size="sm"
+                                    >
+                                        Capturer
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </Col>
                         <Col className="mt-2" xs="auto">
                             <Button
                                 variant="danger"
@@ -125,6 +168,13 @@ export function FlagMarker({ flag }) {
             <Circle
                 center={flag.coordinates}
                 radius={config.flagVisibilityRadius}
+                stroke={false}
+            />
+
+            <Circle
+                center={flag.coordinates}
+                radius={config.flagActionRadius}
+                stroke={false}
             />
         </>
     );
@@ -168,5 +218,52 @@ export function MarkerMarker({ marker }) {
                 </Row>
             </Popup>
         </Marker>
+    );
+}
+
+export function ItemMarker({ item }) {
+    const icon = getItemIcon(item.itemModel.name);
+    const { moveItem, deleteItem } = useItems();
+
+    return (
+        <>
+            <Marker
+                icon={icon}
+                position={item.coordinates}
+                draggable
+                ondragstart={() => localStorage.setItem('moving', 1)}
+                ondragend={(e) => {
+                    moveItem(deserializeDragend(e), item);
+                    localStorage.removeItem('moving');
+                }}
+            >
+                <Popup>
+                    <Row className="justify-content-center">
+                        <Col xs="12">{item.itemModel.name}</Col>
+                        <Col className="mt-2" xs="auto">
+                            <Button
+                                variant="danger"
+                                size="sm"
+                                onClick={() => deleteItem(item)}
+                            >
+                                Supprimer
+                            </Button>
+                        </Col>
+                    </Row>
+                </Popup>
+            </Marker>
+
+            <Circle
+                center={item.coordinates}
+                radius={item.itemModel.visibilityRadius}
+                stroke={false}
+            />
+
+            <Circle
+                center={item.coordinates}
+                radius={item.itemModel.actionRadius}
+                stroke={false}
+            />
+        </>
     );
 }
