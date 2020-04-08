@@ -222,7 +222,7 @@ export function MarkerMarker({ marker }) {
 }
 
 export function ItemMarker({ item }) {
-    const icon = getItemIcon(item.itemModel.name);
+    const icon = getItemIcon(item.name);
     const { moveItem, deleteItem } = useItems();
 
     return (
@@ -239,7 +239,7 @@ export function ItemMarker({ item }) {
             >
                 <Popup>
                     <Row className="justify-content-center">
-                        <Col xs="12">{item.itemModel.name}</Col>
+                        <Col xs="12">{item.name}</Col>
                         <Col className="mt-2" xs="auto">
                             <Button
                                 variant="danger"
@@ -255,13 +255,13 @@ export function ItemMarker({ item }) {
 
             <Circle
                 center={item.coordinates}
-                radius={item.itemModel.visibilityRadius}
+                radius={item.visibilityRadius}
                 stroke={false}
             />
 
             <Circle
                 center={item.coordinates}
-                radius={item.itemModel.actionRadius}
+                radius={item.actionRadius}
                 stroke={false}
             />
         </>
