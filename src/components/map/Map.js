@@ -28,7 +28,7 @@ function Map() {
     const { flags, setFlags, deleteFlag } = useFlags();
     const { markers, setMarkers } = useMarkers();
     const { setTeams } = useTeams();
-    const { items, setItems } = useItems();
+    const { items, setItems, deleteItem } = useItems();
 
     useEffect(() => {
         socket.on('getAreas', (a) => {
@@ -61,6 +61,7 @@ function Map() {
 
     useEffect(() => {
         checkFlags();
+        checkItems();
     }, [gameAreas, forbiddenAreas]);
 
     const checkFlags = () => {
@@ -70,6 +71,17 @@ function Map() {
                 !isInGameAreas(flag.coordinates, gameAreas)
             ) {
                 deleteFlag(flag);
+            }
+        });
+    };
+
+    const checkItems = () => {
+        items.forEach((item) => {
+            if (
+                isInForbiddenAreas(item.coordinates, forbiddenAreas) ||
+                !isInGameAreas(item.coordinates, gameAreas)
+            ) {
+                deleteItem(item);
             }
         });
     };
