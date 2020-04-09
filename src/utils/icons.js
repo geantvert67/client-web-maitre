@@ -32,8 +32,8 @@ export const getItemIcon = (name) => {
 };
 
 export const iconGameArea = new L.Icon({
-    iconUrl: require('../icons/zone.png'),
-    iconRetinaUrl: require('../icons/zone.png'),
+    iconUrl: require('../icons/gameArea.png'),
+    iconRetinaUrl: require('../icons/gameArea.png'),
     iconAnchor: [6, 43],
     popupAnchor: [0, -40],
     iconSize: new L.Point(13, 43),
@@ -41,8 +41,8 @@ export const iconGameArea = new L.Icon({
 });
 
 export const iconForbiddenArea = new L.Icon({
-    iconUrl: require('../icons/zone.png'),
-    iconRetinaUrl: require('../icons/zone.png'),
+    iconUrl: require('../icons/forbiddenArea.png'),
+    iconRetinaUrl: require('../icons/forbiddenArea.png'),
     iconAnchor: [6, 43],
     popupAnchor: [0, -40],
     iconSize: new L.Point(13, 43),
