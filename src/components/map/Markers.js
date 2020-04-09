@@ -239,7 +239,9 @@ export function ItemMarker({ item }) {
             >
                 <Popup>
                     <Row className="justify-content-center">
-                        <Col xs="12">{item.name}</Col>
+                        <Col xs="12">
+                            {item.name} ({item.quantity})
+                        </Col>
                         <Col className="mt-2" xs="auto">
                             <Button
                                 variant="danger"
