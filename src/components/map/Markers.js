@@ -134,7 +134,6 @@ export function FlagMarker({ flag }) {
                                 </Col>
                                 <Col className="mt-1" xs="auto">
                                     <Button
-                                        disabled={flag.capturedUntil}
                                         variant="success"
                                         size="sm"
                                         onClick={() =>
