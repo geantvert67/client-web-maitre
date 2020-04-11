@@ -5,6 +5,7 @@ import ConfigLauncher from './ConfigLauncher';
 import ConfigVisibility from './ConfigVisibility';
 import { useConfig } from '../../utils/useConfig';
 import InvitationsList from '../invitations/InvitationsList';
+import ConfigAccessKey from './ConfigAccessKey';
 
 function Config({ setShowMap }) {
     const { config } = useConfig();
@@ -15,7 +16,10 @@ function Config({ setShowMap }) {
                 <Col md={{ span: 6, offset: 3 }}>
                     <h3>{`${config.name} - ${config.gameMode}`}</h3>
 
-                    <h5 className="mb-4">Visibilité</h5>
+                    <h5 className="mb-4">Clé d'accès</h5>
+                    <ConfigAccessKey />
+
+                    <h5 className="mt-4 mb-4">Visibilité</h5>
                     <ConfigVisibility published={config.published} />
 
                     <h5 className="mt-5 mb-4">Lancement</h5>
