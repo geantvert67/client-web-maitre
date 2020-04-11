@@ -34,7 +34,7 @@ function ScoreItem({ team }) {
     return (
         <tr>
             <th>
-                <Row className="align-items-center justify-content-center">
+                <Row className="align-items-center">
                     <Col xs="auto">
                         <div
                             className="team-color-small"
