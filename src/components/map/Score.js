@@ -1,8 +1,11 @@
 import React from 'react';
 import { Modal, Table, Row, Col } from 'react-bootstrap';
 import { useTeams } from '../../utils/useTeams';
+import { useConfig } from '../../utils/useConfig';
+import { secondsToDuration } from '../../utils/utils';
 
 function Score({ showScore, setShowScore }) {
+    const { config } = useConfig();
     const { teams } = useTeams();
 
     return (
@@ -13,12 +16,20 @@ function Score({ showScore, setShowScore }) {
                         <thead>
                             <tr>
                                 <th>Équipe</th>
-                                <th>Drapeaux capturés</th>
+                                <th>
+                                    {config.gameMode === 'TIME'
+                                        ? 'Temps de possession'
+                                        : 'Drapeaux capturés'}
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             {teams.map((team) => (
-                                <ScoreItem key={team.id} team={team} />
+                                <ScoreItem
+                                    key={team.id}
+                                    team={team}
+                                    gameMode={config.gameMode}
+                                />
                             ))}
                         </tbody>
                     </Table>
@@ -30,7 +41,7 @@ function Score({ showScore, setShowScore }) {
     );
 }
 
-function ScoreItem({ team }) {
+function ScoreItem({ team, gameMode }) {
     return (
         <tr>
             <th>
@@ -44,7 +55,11 @@ function ScoreItem({ team }) {
                     <Col xs="auto">{team.name}</Col>
                 </Row>
             </th>
-            <th>{team.nbFlags}</th>
+            <th>
+                {gameMode === 'TIME'
+                    ? secondsToDuration(team.score)
+                    : team.score}
+            </th>
         </tr>
     );
 }
