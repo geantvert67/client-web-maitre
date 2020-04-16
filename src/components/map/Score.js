@@ -19,7 +19,7 @@ function Score({ showScore, setShowScore }) {
                                 <th>
                                     {config.gameMode === 'TIME'
                                         ? 'Temps de possession'
-                                        : 'Drapeaux capturés'}
+                                        : 'Cristaux capturés'}
                                 </th>
                             </tr>
                         </thead>
