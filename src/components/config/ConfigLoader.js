@@ -4,6 +4,7 @@ import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import Config from './Config';
 import MapWrapper from '../map/MapWrapper';
 import { useConfig } from '../../utils/useConfig';
+import End from '../utils/End';
 
 function ConfigLoader() {
     const { socket } = useSocket();
@@ -16,7 +17,9 @@ function ConfigLoader() {
     }, []);
 
     return config ? (
-        (config.launched || config.willLaunchAt) && showMap ? (
+        config.ended ? (
+            <End />
+        ) : (config.launched || config.willLaunchAt) && showMap ? (
             <MapWrapper setShowMap={setShowMap} />
         ) : (
             <Config setShowMap={setShowMap} />
