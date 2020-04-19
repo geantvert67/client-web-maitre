@@ -90,7 +90,7 @@ export function PlayerMarker({ player }) {
 export function FlagMarker({ flag }) {
     const color = flag.team ? flag.team.color : 'grey';
     const { config } = useConfig();
-    const { moveFlag, deleteFlag, captureFlag } = useFlags();
+    const { moveFlag, deleteFlag, captureFlag, resetFlag } = useFlags();
     const { teams } = useTeams();
     const teamInput = useRef(null);
 
@@ -132,22 +132,27 @@ export function FlagMarker({ flag }) {
                                         ))}
                                     </Form.Control>
                                 </Col>
-                                <Col
-                                    className="mt-1"
-                                    xs="auto"
-                                    onClick={() =>
-                                        captureFlag(
-                                            flag.id,
-                                            teamInput.current.value
-                                        )
-                                    }
-                                >
+                                <Col className="mt-1" xs="auto">
                                     <Button
-                                        disabled={flag.capturedUntil}
                                         variant="success"
                                         size="sm"
+                                        onClick={() =>
+                                            captureFlag(
+                                                flag.id,
+                                                teamInput.current.value
+                                            )
+                                        }
                                     >
                                         Capturer
+                                    </Button>
+                                    <Button
+                                        className="ml-2"
+                                        disabled={!flag.team}
+                                        variant="light"
+                                        size="sm"
+                                        onClick={() => resetFlag(flag.id)}
+                                    >
+                                        Réinitialiser
                                     </Button>
                                 </Col>
                             </Row>

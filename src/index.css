@@ -4,6 +4,10 @@ body {
     color: white !important;
 }
 
+button:disabled {
+    cursor: not-allowed !important;
+}
+
 .alert-danger {
     background-color: #eb4646 !important;
     color: white !important;

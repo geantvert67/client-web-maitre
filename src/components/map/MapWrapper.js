@@ -7,17 +7,17 @@ import { ForbiddenAreaProvider } from '../../utils/useForbiddenAreas';
 import { PlayerProvider } from '../../utils/usePlayers';
 import { FlagProvider } from '../../utils/useFlags';
 import { MarkerProvider } from '../../utils/useMarkers';
-import { TeamProvider } from '../../utils/useTeams';
 import { useConfig } from '../../utils/useConfig';
 import Score from './Score';
 import { ItemProvider } from '../../utils/useItems';
+import Timer from './Timer';
 
 function MapWrapper({ setShowMap }) {
     const { config } = useConfig();
     const [showScore, setShowScore] = useState(false);
 
     return (
-        <TeamProvider>
+        <>
             {config.willLaunchAt && !config.launched && (
                 <>
                     <Alert className="alert-toast" variant="success">
@@ -35,6 +35,13 @@ function MapWrapper({ setShowMap }) {
                         Retour
                     </Button>
                 </>
+            )}
+
+            {config.launched && config.duration && (
+                <Timer
+                    duration={config.duration}
+                    launchedAt={config.launchedAt}
+                />
             )}
 
             <GameAreaProvider>
@@ -60,7 +67,7 @@ function MapWrapper({ setShowMap }) {
             >
                 Score
             </Button>
-        </TeamProvider>
+        </>
     );
 }
 

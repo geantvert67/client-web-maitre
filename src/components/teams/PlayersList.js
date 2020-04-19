@@ -1,9 +1,10 @@
 import React from 'react';
+import _ from 'lodash';
 import { Card } from 'react-bootstrap';
 
 function PlayersList({ players }) {
     return players.length > 0 ? (
-        players.map((player) => {
+        _.sortBy(players, ['username']).map((player) => {
             return (
                 <Card key={player.username} className="mt-2">
                     <Card.Body>

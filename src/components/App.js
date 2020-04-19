@@ -4,13 +4,16 @@ import { useSocket } from '../utils/useSocket';
 import ConfigLoader from './config/ConfigLoader';
 import Disconnected from './utils/Disconnected';
 import { ConfigProvider } from '../utils/useConfig';
+import { TeamProvider } from '../utils/useTeams';
 
 function App() {
     const { connected } = useSocket();
 
     return connected ? (
         <ConfigProvider>
-            <ConfigLoader />
+            <TeamProvider>
+                <ConfigLoader />
+            </TeamProvider>
         </ConfigProvider>
     ) : (
         <Disconnected />
