@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import _ from 'lodash';
 import { useSocket } from '../../utils/useSocket';
 import { Card, Row, Col, Accordion } from 'react-bootstrap';
 import PlayersList from './PlayersList';
@@ -12,7 +13,7 @@ function TeamsList({ maxPlayers }) {
         socket.emit('getTeams');
     }, []);
 
-    return teams.map((team) => {
+    return _.sortBy(teams, ['name']).map((team) => {
         return (
             <Accordion key={team.id} className="mb-4">
                 <Accordion.Toggle as={Card}>

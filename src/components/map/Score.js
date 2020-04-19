@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import { Modal, Table, Row, Col } from 'react-bootstrap';
 import { useTeams } from '../../utils/useTeams';
 import { useConfig } from '../../utils/useConfig';
@@ -24,7 +25,11 @@ function Score({ showScore, setShowScore }) {
                             </tr>
                         </thead>
                         <tbody>
-                            {teams.map((team) => (
+                            {_.orderBy(
+                                teams,
+                                ['score', 'name'],
+                                ['desc', 'asc']
+                            ).map((team) => (
                                 <ScoreItem
                                     key={team.id}
                                     team={team}
