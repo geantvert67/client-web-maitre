@@ -8,13 +8,11 @@ import { PlayerProvider } from '../../utils/usePlayers';
 import { FlagProvider } from '../../utils/useFlags';
 import { MarkerProvider } from '../../utils/useMarkers';
 import { useConfig } from '../../utils/useConfig';
-import Score from './Score';
 import { ItemProvider } from '../../utils/useItems';
 import Timer from './Timer';
 
 function MapWrapper({ setShowMap }) {
     const { config } = useConfig();
-    const [showScore, setShowScore] = useState(false);
 
     return (
         <>
@@ -57,16 +55,6 @@ function MapWrapper({ setShowMap }) {
                     </PlayerProvider>
                 </ForbiddenAreaProvider>
             </GameAreaProvider>
-
-            <Score showScore={showScore} setShowScore={setShowScore} />
-
-            <Button
-                onClick={() => setShowScore(true)}
-                className="btn-toast"
-                variant="success"
-            >
-                Score
-            </Button>
         </>
     );
 }
