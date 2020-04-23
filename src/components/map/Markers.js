@@ -18,6 +18,8 @@ import { useGameAreas } from '../../utils/useGameAreas';
 import { useForbiddenAreas } from '../../utils/useForbiddenAreas';
 import { useItems } from '../../utils/useItems';
 import { useTeams } from '../../utils/useTeams';
+import { secondsToDuration } from '../../utils/utils';
+import moment from 'moment';
 
 export function GameAreaMarker({ position, areaId }) {
     const { moveGameArea, deleteGameAreaPoint } = useGameAreas();
@@ -112,8 +114,23 @@ export function FlagMarker({ flag }) {
                             {flag.team
                                 ? `Capturé par ${flag.team.name}`
                                 : 'Non capturé'}
-                            {flag.capturedUntil && ` (Incapturable)`}
                         </Col>
+
+                        {flag.capturedUntil && (
+                            <Col xs="12">
+                                Incapturable pendant{' '}
+                                {secondsToDuration(
+                                    moment
+                                        .duration(
+                                            moment(flag.capturedUntil).diff(
+                                                moment()
+                                            )
+                                        )
+                                        .asSeconds()
+                                )}
+                            </Col>
+                        )}
+
                         <Col className="mt-2" xs="12">
                             <Row className="justify-content-center">
                                 <Col xs="auto">
