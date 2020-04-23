@@ -264,6 +264,22 @@ export function ItemMarker({ item }) {
                         <Col xs="12">
                             {item.name} ({item.quantity})
                         </Col>
+
+                        {item.waitingUntil && (
+                            <Col xs="12">
+                                Non-ramassable pendant{' '}
+                                {secondsToDuration(
+                                    moment
+                                        .duration(
+                                            moment(item.waitingUntil).diff(
+                                                moment()
+                                            )
+                                        )
+                                        .asSeconds()
+                                )}
+                            </Col>
+                        )}
+
                         <Col className="mt-2" xs="auto">
                             <Button
                                 variant="danger"
