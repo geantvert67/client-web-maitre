@@ -116,6 +116,10 @@ export function FlagMarker({ flag }) {
                                 : 'Non capturé'}
                         </Col>
 
+                        {flag.hasOracle && (
+                            <Col xs="12">Protégé par un oracle</Col>
+                        )}
+
                         {flag.capturedUntil && (
                             <Col xs="12">
                                 Incapturable pendant{' '}
