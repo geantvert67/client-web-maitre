@@ -10,6 +10,7 @@ import { MarkerProvider } from '../../utils/useMarkers';
 import { useConfig } from '../../utils/useConfig';
 import { ItemProvider } from '../../utils/useItems';
 import Timer from './Timer';
+import { TrapProvider } from '../../utils/useTraps';
 
 function MapWrapper({ setShowMap }) {
     const { config } = useConfig();
@@ -48,7 +49,9 @@ function MapWrapper({ setShowMap }) {
                         <FlagProvider>
                             <MarkerProvider>
                                 <ItemProvider>
-                                    <Map />
+                                    <TrapProvider>
+                                        <Map />
+                                    </TrapProvider>
                                 </ItemProvider>
                             </MarkerProvider>
                         </FlagProvider>

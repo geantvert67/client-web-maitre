@@ -20,6 +20,7 @@ import { useItems } from '../../utils/useItems';
 import { useTeams } from '../../utils/useTeams';
 import { secondsToDuration } from '../../utils/utils';
 import moment from 'moment';
+import { useTraps } from '../../utils/useTraps';
 
 export function GameAreaMarker({ position, areaId }) {
     const { moveGameArea, deleteGameAreaPoint } = useGameAreas();
@@ -306,6 +307,71 @@ export function ItemMarker({ item }) {
             <Circle
                 center={item.coordinates}
                 radius={item.actionRadius}
+                stroke={false}
+            />
+        </>
+    );
+}
+
+export function TrapMarker({ trap }) {
+    const icon = getItemIcon(trap.name);
+    const { moveTrap, deleteTrap } = useTraps();
+
+    return (
+        <>
+            <Marker
+                icon={icon}
+                position={trap.coordinates}
+                draggable
+                ondragstart={() => localStorage.setItem('moving', 1)}
+                ondragend={(e) => {
+                    moveTrap(deserializeDragend(e), trap);
+                    localStorage.removeItem('moving');
+                }}
+            >
+                <Popup>
+                    <Row className="justify-content-center">
+                        <Col xs="12">
+                            {trap.name} posé par {trap.owner.username}
+                        </Col>
+
+                        {trap.inactiveUntil && (
+                            <Col xs="12">
+                                Activé dans{' '}
+                                {secondsToDuration(
+                                    moment
+                                        .duration(
+                                            moment(trap.inactiveUntil).diff(
+                                                moment()
+                                            )
+                                        )
+                                        .asSeconds()
+                                )}
+                            </Col>
+                        )}
+
+                        <Col className="mt-2" xs="auto">
+                            <Button
+                                variant="danger"
+                                size="sm"
+                                onClick={() => deleteTrap(trap)}
+                            >
+                                Supprimer
+                            </Button>
+                        </Col>
+                    </Row>
+                </Popup>
+            </Marker>
+
+            <Circle
+                center={trap.coordinates}
+                radius={trap.visibilityRadius}
+                stroke={false}
+            />
+
+            <Circle
+                center={trap.coordinates}
+                radius={trap.actionRadius}
                 stroke={false}
             />
         </>

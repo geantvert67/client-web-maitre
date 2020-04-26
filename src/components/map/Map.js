@@ -16,12 +16,13 @@ import {
 } from '../../utils/map';
 import { useForbiddenAreas } from '../../utils/useForbiddenAreas';
 import ForbiddenArea from './ForbiddenArea';
-import { FlagMarker, MarkerMarker, ItemMarker } from './Markers';
+import { FlagMarker, MarkerMarker, ItemMarker, TrapMarker } from './Markers';
 import { useFlags } from '../../utils/useFlags';
 import { useMarkers } from '../../utils/useMarkers';
 import { useTeams } from '../../utils/useTeams';
 import PlayerList from './PlayerList';
 import { useItems } from '../../utils/useItems';
+import { useTraps } from '../../utils/useTraps';
 
 function Map() {
     const { socket } = useSocket();
@@ -34,6 +35,7 @@ function Map() {
     const { markers, setMarkers } = useMarkers();
     const { setTeams } = useTeams();
     const { items, setItems, deleteItem } = useItems();
+    const { traps, setTraps, deleteTrap } = useTraps();
     const map = useRef(null);
 
     useEffect(() => {
@@ -48,6 +50,7 @@ function Map() {
                 setMarkers(o.markers);
                 setFlags(o.flags);
                 setItems(o.items);
+                setTraps(o.traps);
                 setTeams(o.teams);
             }
         });
@@ -66,28 +69,18 @@ function Map() {
     }, [gameAreas]);
 
     useEffect(() => {
-        checkFlags();
-        checkItems();
+        checkObjects(flags, deleteFlag);
+        checkObjects(items, deleteItem);
+        checkObjects(traps, deleteTrap);
     }, [gameAreas, forbiddenAreas]);
 
-    const checkFlags = () => {
-        flags.forEach((flag) => {
+    const checkObjects = (objects, deleteObject) => {
+        objects.forEach((o) => {
             if (
-                isInForbiddenAreas(flag.coordinates, forbiddenAreas) ||
-                !isInGameAreas(flag.coordinates, gameAreas)
+                isInForbiddenAreas(o.coordinates, forbiddenAreas) ||
+                !isInGameAreas(o.coordinates, gameAreas)
             ) {
-                deleteFlag(flag);
-            }
-        });
-    };
-
-    const checkItems = () => {
-        items.forEach((item) => {
-            if (
-                isInForbiddenAreas(item.coordinates, forbiddenAreas) ||
-                !isInGameAreas(item.coordinates, gameAreas)
-            ) {
-                deleteItem(item);
+                deleteObject(o);
             }
         });
     };
@@ -130,6 +123,10 @@ function Map() {
 
                 {items.map((item) => (
                     <ItemMarker key={item.id} item={item} />
+                ))}
+
+                {traps.map((trap) => (
+                    <TrapMarker key={trap.id} trap={trap} />
                 ))}
             </LeafletMap>
 
