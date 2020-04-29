@@ -17,9 +17,9 @@ function End() {
         socket.emit('getTeams');
     }, []);
 
-    const stopServer = () => {
-        socket.emit('stopServer');
-    };
+    const stopServer = () => socket.emit('stopServer');
+
+    const restartServer = () => socket.emit('restartServer');
 
     return (
         <Container className="my-5">
@@ -41,8 +41,13 @@ function End() {
 
             <Row className="mt-5 justify-content-end">
                 <Col xs="auto">
-                    <Button variant="success" onClick={stopServer}>
+                    <Button variant="light" onClick={stopServer}>
                         Arrêter le serveur
+                    </Button>
+                </Col>
+                <Col xs="auto">
+                    <Button variant="success" onClick={restartServer}>
+                        Relancer une partie
                     </Button>
                 </Col>
             </Row>
