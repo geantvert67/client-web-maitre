@@ -15,3 +15,7 @@ export const areFlagEqual = (prevProps, nextProps) => {
 export const areMarkerEqual = (prevProps, nextProps) => {
     return prevProps.marker.nbUpdates === nextProps.marker.nbUpdates;
 };
+
+export const areItemEqual = (prevProps, nextProps) => {
+    return prevProps.item.nbUpdates === nextProps.item.nbUpdates;
+};

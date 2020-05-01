@@ -22,6 +22,7 @@ import {
     secondsToDuration,
     areFlagEqual,
     areMarkerEqual,
+    areItemEqual,
 } from '../../utils/utils';
 import moment from 'moment';
 import { useTraps } from '../../utils/useTraps';
@@ -252,7 +253,7 @@ export function MapMarker({ marker }) {
     );
 }
 
-export function ItemMarker({ item }) {
+export function Item({ item }) {
     const icon = getItemIcon(item.name);
     const { moveItem, deleteItem } = useItems();
 
@@ -384,3 +385,4 @@ export function TrapMarker({ trap }) {
 
 export const FlagMarker = React.memo(Flag, areFlagEqual);
 export const MarkerMarker = React.memo(MapMarker, areMarkerEqual);
+export const ItemMarker = React.memo(Item, areItemEqual);

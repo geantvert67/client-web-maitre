@@ -19,8 +19,12 @@ export const ItemProvider = ({ children }) => {
         ) {
             item.coordinates = coordinates;
             setItems([...items.filter((i) => i.id !== item.id), ...[item]]);
-            socket.emit('moveItem', { coordinates, itemId: item.id });
         }
+
+        socket.emit('moveItem', {
+            coordinates: item.coordinates,
+            itemId: item.id,
+        });
     };
 
     const deleteItem = (item) => {
