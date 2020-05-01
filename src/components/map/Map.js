@@ -23,6 +23,7 @@ import { useTeams } from '../../utils/useTeams';
 import PlayerList from './PlayerList';
 import { useItems } from '../../utils/useItems';
 import { useTraps } from '../../utils/useTraps';
+import FlagList from './FlagList';
 
 function Map() {
     const { socket } = useSocket();
@@ -31,7 +32,7 @@ function Map() {
     const [showScore, setShowScore] = useState(false);
     const { gameAreas, setGameAreas } = useGameAreas();
     const { forbiddenAreas, setForbiddenAreas } = useForbiddenAreas();
-    const { flags, setFlags, deleteFlag } = useFlags();
+    const { flags, deleteFlag } = useFlags();
     const { markers, setMarkers } = useMarkers();
     const { setTeams } = useTeams();
     const { items, setItems, deleteItem } = useItems();
@@ -48,7 +49,6 @@ function Map() {
         socket.on('adminRoutine', (o) => {
             if (!localStorage.getItem('moving')) {
                 setMarkers(o.markers);
-                setFlags(o.flags);
                 setItems(o.items);
                 setTraps(o.traps);
                 setTeams(o.teams);
@@ -113,9 +113,7 @@ function Map() {
 
                 <PlayerList />
 
-                {flags.map((flag) => (
-                    <FlagMarker key={flag.id} flag={flag} />
-                ))}
+                <FlagList />
 
                 {markers.map((marker) => (
                     <MarkerMarker key={marker.id} marker={marker} />

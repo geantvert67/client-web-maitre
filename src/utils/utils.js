@@ -7,3 +7,7 @@ export const secondsToDuration = (seconds) => {
         m <= 0 ? '00' : ('0' + m).slice(-2)
     }:${s <= 0 ? '00' : ('0' + s).slice(-2)}`;
 };
+
+export const areFlagEqual = (prevProps, nextProps) => {
+    return prevProps.flag.nbUpdates === nextProps.flag.nbUpdates;
+};
