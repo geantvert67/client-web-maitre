@@ -16,7 +16,7 @@ import {
 } from '../../utils/map';
 import { useForbiddenAreas } from '../../utils/useForbiddenAreas';
 import ForbiddenArea from './ForbiddenArea';
-import { FlagMarker, MarkerMarker, ItemMarker, TrapMarker } from './Markers';
+import { ItemMarker, TrapMarker } from './Markers';
 import { useFlags } from '../../utils/useFlags';
 import { useMarkers } from '../../utils/useMarkers';
 import { useTeams } from '../../utils/useTeams';
@@ -24,6 +24,7 @@ import PlayerList from './PlayerList';
 import { useItems } from '../../utils/useItems';
 import { useTraps } from '../../utils/useTraps';
 import FlagList from './FlagList';
+import MarkerList from './MarkerList';
 
 function Map() {
     const { socket } = useSocket();
@@ -115,9 +116,7 @@ function Map() {
 
                 <FlagList />
 
-                {markers.map((marker) => (
-                    <MarkerMarker key={marker.id} marker={marker} />
-                ))}
+                <MarkerList />
 
                 {items.map((item) => (
                     <ItemMarker key={item.id} item={item} />

@@ -11,3 +11,7 @@ export const secondsToDuration = (seconds) => {
 export const areFlagEqual = (prevProps, nextProps) => {
     return prevProps.flag.nbUpdates === nextProps.flag.nbUpdates;
 };
+
+export const areMarkerEqual = (prevProps, nextProps) => {
+    return prevProps.marker.nbUpdates === nextProps.marker.nbUpdates;
+};

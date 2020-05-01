@@ -18,7 +18,11 @@ import { useGameAreas } from '../../utils/useGameAreas';
 import { useForbiddenAreas } from '../../utils/useForbiddenAreas';
 import { useItems } from '../../utils/useItems';
 import { useTeams } from '../../utils/useTeams';
-import { secondsToDuration, areFlagEqual } from '../../utils/utils';
+import {
+    secondsToDuration,
+    areFlagEqual,
+    areMarkerEqual,
+} from '../../utils/utils';
 import moment from 'moment';
 import { useTraps } from '../../utils/useTraps';
 
@@ -207,7 +211,7 @@ function Flag({ flag }) {
     );
 }
 
-export function MarkerMarker({ marker }) {
+export function MapMarker({ marker }) {
     const color = marker.team.color;
     const { moveMarker, deleteMarker } = useMarkers();
 
@@ -379,3 +383,4 @@ export function TrapMarker({ trap }) {
 }
 
 export const FlagMarker = React.memo(Flag, areFlagEqual);
+export const MarkerMarker = React.memo(MapMarker, areMarkerEqual);

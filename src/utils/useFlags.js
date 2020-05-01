@@ -1,5 +1,4 @@
 import React, { useState, createContext, useContext } from 'react';
-import _ from 'lodash';
 import { useSocket } from './useSocket';
 import { useForbiddenAreas } from './useForbiddenAreas';
 import { isInForbiddenAreas, isFlagInConflict, isInGameAreas } from './map';
@@ -26,9 +25,9 @@ export const FlagProvider = ({ children }) => {
             isInGameAreas(coordinates, gameAreas)
         ) {
             flag.coordinates = coordinates;
+            setFlags([...flags.filter((f) => f.id !== flag.id), ...[flag]]);
         }
 
-        setFlags([...flags.filter((f) => f.id !== flag.id), ...[flag]]);
         socket.emit('moveFlag', {
             coordinates: flag.coordinates,
             flagId: flag.id,
