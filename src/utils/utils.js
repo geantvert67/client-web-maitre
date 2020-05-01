@@ -19,3 +19,7 @@ export const areMarkerEqual = (prevProps, nextProps) => {
 export const areItemEqual = (prevProps, nextProps) => {
     return prevProps.item.nbUpdates === nextProps.item.nbUpdates;
 };
+
+export const areTrapEqual = (prevProps, nextProps) => {
+    return prevProps.trap.nbUpdates === nextProps.trap.nbUpdates;
+};

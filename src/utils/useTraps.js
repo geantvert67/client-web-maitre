@@ -19,8 +19,12 @@ export const TrapProvider = ({ children }) => {
         ) {
             trap.coordinates = coordinates;
             setTraps([...traps.filter((t) => t.id !== trap.id), ...[trap]]);
-            socket.emit('moveTrap', { coordinates, trapId: trap.id });
         }
+
+        socket.emit('moveTrap', {
+            coordinates: trap.coordinates,
+            trapId: trap.id,
+        });
     };
 
     const deleteTrap = (trap) => {

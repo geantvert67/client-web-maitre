@@ -26,6 +26,7 @@ import { useTraps } from '../../utils/useTraps';
 import FlagList from './FlagList';
 import MarkerList from './MarkerList';
 import ItemList from './ItemList';
+import TrapList from './TrapList';
 
 function Map() {
     const { socket } = useSocket();
@@ -35,10 +36,9 @@ function Map() {
     const { gameAreas, setGameAreas } = useGameAreas();
     const { forbiddenAreas, setForbiddenAreas } = useForbiddenAreas();
     const { flags, deleteFlag } = useFlags();
-    const { markers, setMarkers } = useMarkers();
     const { setTeams } = useTeams();
-    const { items, setItems, deleteItem } = useItems();
-    const { traps, setTraps, deleteTrap } = useTraps();
+    const { items, deleteItem } = useItems();
+    const { traps, deleteTrap } = useTraps();
     const map = useRef(null);
 
     useEffect(() => {
@@ -50,9 +50,6 @@ function Map() {
 
         socket.on('adminRoutine', (o) => {
             if (!localStorage.getItem('moving')) {
-                setMarkers(o.markers);
-                setItems(o.items);
-                setTraps(o.traps);
                 setTeams(o.teams);
             }
         });
@@ -121,9 +118,7 @@ function Map() {
 
                 <ItemList />
 
-                {traps.map((trap) => (
-                    <TrapMarker key={trap.id} trap={trap} />
-                ))}
+                <TrapList />
             </LeafletMap>
 
             <Score showScore={showScore} setShowScore={setShowScore} />
