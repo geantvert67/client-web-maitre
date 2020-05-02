@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Marker, Popup, Circle } from 'react-leaflet';
+import { Marker as LeafletMarker, Popup, Circle } from 'react-leaflet';
 import {
     iconForbiddenArea,
     iconGameArea,
@@ -27,6 +27,45 @@ import {
 } from '../../utils/utils';
 import moment from 'moment';
 import { useTraps } from '../../utils/useTraps';
+import { useAction } from '../../utils/useAction';
+
+function Marker({ ondragend, children, ...props }) {
+    const {
+        action,
+        setAction,
+        sleepingAction,
+        setSleepingAction,
+    } = useAction();
+
+    const handleDragStart = () => {
+        setAction('moveElement');
+        setSleepingAction(action);
+    };
+
+    const handleDragEnd = (e) => {
+        setTimeout(() => {
+            setAction(sleepingAction);
+            setSleepingAction(null);
+            ondragend(e);
+        }, 1);
+    };
+
+    const handleClick = () => {
+        setAction('showPopup');
+        setSleepingAction(action);
+    };
+
+    return (
+        <LeafletMarker
+            ondragstart={handleDragStart}
+            ondragend={handleDragEnd}
+            onClick={handleClick}
+            {...props}
+        >
+            {children}
+        </LeafletMarker>
+    );
+}
 
 export function GameAreaMarker({ position, areaId }) {
     const { moveGameArea, deleteGameAreaPoint } = useGameAreas();

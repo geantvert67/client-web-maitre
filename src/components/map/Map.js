@@ -39,7 +39,12 @@ function Map() {
     const { items, deleteItem } = useItems();
     const { traps, deleteTrap } = useTraps();
     const { setTeams } = useTeams();
-    const { action } = useAction();
+    const {
+        action,
+        setAction,
+        sleepingAction,
+        setSleepingAction,
+    } = useAction();
     const map = useRef(null);
 
     useEffect(() => {
@@ -98,6 +103,13 @@ function Map() {
         }
     };
 
+    const handlePopupClose = () => {
+        setTimeout(() => {
+            setAction(sleepingAction);
+            setSleepingAction(null);
+        }, 1);
+    };
+
     return (
         <>
             <LeafletMap
@@ -108,6 +120,7 @@ function Map() {
                 minZoom={5}
                 maxZoom={25}
                 onClick={handleAction}
+                onpopupclose={handlePopupClose}
             >
                 <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
 
