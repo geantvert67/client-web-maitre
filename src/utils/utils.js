@@ -7,3 +7,23 @@ export const secondsToDuration = (seconds) => {
         m <= 0 ? '00' : ('0' + m).slice(-2)
     }:${s <= 0 ? '00' : ('0' + s).slice(-2)}`;
 };
+
+export const areFlagEqual = (prevProps, nextProps) => {
+    return prevProps.flag.nbUpdates === nextProps.flag.nbUpdates;
+};
+
+export const areMarkerEqual = (prevProps, nextProps) => {
+    return prevProps.marker.nbUpdates === nextProps.marker.nbUpdates;
+};
+
+export const areItemEqual = (prevProps, nextProps) => {
+    return prevProps.item.nbUpdates === nextProps.item.nbUpdates;
+};
+
+export const areTrapEqual = (prevProps, nextProps) => {
+    return prevProps.trap.nbUpdates === nextProps.trap.nbUpdates;
+};
+
+export const areTeamEqual = (prevProps, nextProps) => {
+    return prevProps.team.score === nextProps.team.score;
+};

@@ -26,8 +26,12 @@ export const FlagProvider = ({ children }) => {
         ) {
             flag.coordinates = coordinates;
             setFlags([...flags.filter((f) => f.id !== flag.id), ...[flag]]);
-            socket.emit('moveFlag', { coordinates, flagId: flag.id });
         }
+
+        socket.emit('moveFlag', {
+            coordinates: flag.coordinates,
+            flagId: flag.id,
+        });
     };
 
     const deleteFlag = (flag) => {

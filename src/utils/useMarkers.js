@@ -22,8 +22,12 @@ export const MarkerProvider = ({ children }) => {
                 ...markers.filter((f) => f.id !== marker.id),
                 ...[marker],
             ]);
-            socket.emit('moveMarker', { coordinates, markerId: marker.id });
         }
+
+        socket.emit('moveMarker', {
+            coordinates: marker.coordinates,
+            markerId: marker.id,
+        });
     };
 
     const deleteMarker = (marker) => {

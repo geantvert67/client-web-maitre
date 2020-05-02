@@ -4,7 +4,7 @@ import { Button, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVectorSquare } from '@fortawesome/free-solid-svg-icons';
 import { getCenterOfBounds } from 'geolib';
-import Score from './Score';
+import ScoreModal from './ScoreModal';
 import { useSocket } from '../../utils/useSocket';
 import { useGameAreas } from '../../utils/useGameAreas';
 import GameArea from './GameArea';
@@ -16,13 +16,15 @@ import {
 } from '../../utils/map';
 import { useForbiddenAreas } from '../../utils/useForbiddenAreas';
 import ForbiddenArea from './ForbiddenArea';
-import { FlagMarker, MarkerMarker, ItemMarker, TrapMarker } from './Markers';
 import { useFlags } from '../../utils/useFlags';
-import { useMarkers } from '../../utils/useMarkers';
-import { useTeams } from '../../utils/useTeams';
 import PlayerList from './PlayerList';
 import { useItems } from '../../utils/useItems';
 import { useTraps } from '../../utils/useTraps';
+import { useTeams } from '../../utils/useTeams';
+import FlagList from './FlagList';
+import MarkerList from './MarkerList';
+import ItemList from './ItemList';
+import TrapList from './TrapList';
 
 function Map() {
     const { socket } = useSocket();
@@ -31,11 +33,10 @@ function Map() {
     const [showScore, setShowScore] = useState(false);
     const { gameAreas, setGameAreas } = useGameAreas();
     const { forbiddenAreas, setForbiddenAreas } = useForbiddenAreas();
-    const { flags, setFlags, deleteFlag } = useFlags();
-    const { markers, setMarkers } = useMarkers();
+    const { flags, deleteFlag } = useFlags();
+    const { items, deleteItem } = useItems();
+    const { traps, deleteTrap } = useTraps();
     const { setTeams } = useTeams();
-    const { items, setItems, deleteItem } = useItems();
-    const { traps, setTraps, deleteTrap } = useTraps();
     const map = useRef(null);
 
     useEffect(() => {
@@ -45,15 +46,9 @@ function Map() {
         });
         socket.emit('getAreas');
 
-        socket.on('adminRoutine', (o) => {
-            if (!localStorage.getItem('moving')) {
-                setMarkers(o.markers);
-                setFlags(o.flags);
-                setItems(o.items);
-                setTraps(o.traps);
-                setTeams(o.teams);
-            }
-        });
+        socket.on('getTeams', (t) => setTeams(t));
+        socket.emit('getTeams');
+
         const interval = setInterval(() => socket.emit('adminRoutine'), 1000);
         localStorage.removeItem('moving');
 
@@ -113,24 +108,16 @@ function Map() {
 
                 <PlayerList />
 
-                {flags.map((flag) => (
-                    <FlagMarker key={flag.id} flag={flag} />
-                ))}
+                <FlagList />
 
-                {markers.map((marker) => (
-                    <MarkerMarker key={marker.id} marker={marker} />
-                ))}
+                <MarkerList />
 
-                {items.map((item) => (
-                    <ItemMarker key={item.id} item={item} />
-                ))}
+                <ItemList />
 
-                {traps.map((trap) => (
-                    <TrapMarker key={trap.id} trap={trap} />
-                ))}
+                <TrapList />
             </LeafletMap>
 
-            <Score showScore={showScore} setShowScore={setShowScore} />
+            <ScoreModal showScore={showScore} setShowScore={setShowScore} />
 
             <Row className="btn-toast">
                 <Col xs="auto">
