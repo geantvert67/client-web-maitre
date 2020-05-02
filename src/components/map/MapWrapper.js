@@ -11,12 +11,13 @@ import { useConfig } from '../../utils/useConfig';
 import { ItemProvider } from '../../utils/useItems';
 import Timer from './Timer';
 import { TrapProvider } from '../../utils/useTraps';
+import SidebarWrapper from '../sidebar/SidebarWrapper';
 
 function MapWrapper({ setShowMap }) {
     const { config } = useConfig();
 
     return (
-        <>
+        <div className="map-container">
             {config.willLaunchAt && !config.launched && (
                 <>
                     <Alert className="alert-toast" variant="success">
@@ -50,6 +51,7 @@ function MapWrapper({ setShowMap }) {
                             <MarkerProvider>
                                 <ItemProvider>
                                     <TrapProvider>
+                                        <SidebarWrapper />
                                         <Map />
                                     </TrapProvider>
                                 </ItemProvider>
@@ -58,7 +60,7 @@ function MapWrapper({ setShowMap }) {
                     </PlayerProvider>
                 </ForbiddenAreaProvider>
             </GameAreaProvider>
-        </>
+        </div>
     );
 }
 
