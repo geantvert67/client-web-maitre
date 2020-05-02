@@ -64,7 +64,11 @@ function Map() {
     }, []);
 
     useEffect(() => {
-        if (gameAreas.length > 0 && !position) {
+        if (
+            gameAreas.length > 0 &&
+            !position &&
+            gameAreas[0].coordinates[0].length > 0
+        ) {
             setPosition(
                 deserializePoint(getCenterOfBounds(gameAreas[0].coordinates[0]))
             );
@@ -89,9 +93,11 @@ function Map() {
     };
 
     const centerOnGameArea = () => {
-        map.current.leafletElement.panTo(
-            deserializePoint(getCenterOfBounds(gameAreas[0].coordinates[0]))
-        );
+        if (gameAreas.length > 0 && gameAreas[0].coordinates[0].length > 0) {
+            map.current.leafletElement.panTo(
+                deserializePoint(getCenterOfBounds(gameAreas[0].coordinates[0]))
+            );
+        }
     };
 
     const handleAction = (e) => {
