@@ -43,6 +43,34 @@
     transition: all 0.3s ease;
 }
 
+.collapsable {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.actions-item {
+    background-color: #1b1e22;
+    padding: 0.75rem 1.25rem !important;
+    border-radius: 4px;
+    box-shadow: 0px 1px 3px #1b1e22;
+    cursor: pointer;
+}
+
+.actions-item-selected {
+    background-color: #68b684;
+}
+
+.actions-item-img {
+    max-height: 25px !important;
+    max-width: 25px !important;
+}
+
+.danger {
+    color: #eb4646 !important;
+}
+
 @media screen and (max-width: 900px) {
     .map-menu {
         width: 50%;

@@ -11,6 +11,7 @@ import { useConfig } from '../../utils/useConfig';
 import { ItemProvider } from '../../utils/useItems';
 import Timer from './Timer';
 import { TrapProvider } from '../../utils/useTraps';
+import { ActionProvider } from '../../utils/useAction';
 import SidebarWrapper from '../sidebar/SidebarWrapper';
 
 function MapWrapper({ setShowMap }) {
@@ -51,8 +52,10 @@ function MapWrapper({ setShowMap }) {
                             <MarkerProvider>
                                 <ItemProvider>
                                     <TrapProvider>
-                                        <SidebarWrapper />
-                                        <Map />
+                                        <ActionProvider>
+                                            <SidebarWrapper />
+                                            <Map />
+                                        </ActionProvider>
                                     </TrapProvider>
                                 </ItemProvider>
                             </MarkerProvider>

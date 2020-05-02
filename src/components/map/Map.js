@@ -13,6 +13,7 @@ import {
     formatAreas,
     isInForbiddenAreas,
     isInGameAreas,
+    deserializeClick,
 } from '../../utils/map';
 import { useForbiddenAreas } from '../../utils/useForbiddenAreas';
 import ForbiddenArea from './ForbiddenArea';
@@ -21,6 +22,7 @@ import PlayerList from './PlayerList';
 import { useItems } from '../../utils/useItems';
 import { useTraps } from '../../utils/useTraps';
 import { useTeams } from '../../utils/useTeams';
+import { useAction } from '../../utils/useAction';
 import FlagList from './FlagList';
 import MarkerList from './MarkerList';
 import ItemList from './ItemList';
@@ -31,12 +33,13 @@ function Map() {
     const [zoom, setZoom] = useState(17);
     const [position, setPosition] = useState(null);
     const [showScore, setShowScore] = useState(false);
-    const { gameAreas, setGameAreas } = useGameAreas();
+    const { gameAreas, setGameAreas, createGameAreaPoint } = useGameAreas();
     const { forbiddenAreas, setForbiddenAreas } = useForbiddenAreas();
     const { flags, deleteFlag } = useFlags();
     const { items, deleteItem } = useItems();
     const { traps, deleteTrap } = useTraps();
     const { setTeams } = useTeams();
+    const { action } = useAction();
     const map = useRef(null);
 
     useEffect(() => {
@@ -86,6 +89,15 @@ function Map() {
         );
     };
 
+    const handleAction = (e) => {
+        const coordinates = deserializeClick(e);
+
+        switch (action) {
+            case 'gameArea':
+                createGameAreaPoint(coordinates);
+        }
+    };
+
     return (
         <>
             <LeafletMap
@@ -95,6 +107,7 @@ function Map() {
                 zoom={zoom}
                 minZoom={5}
                 maxZoom={25}
+                onClick={handleAction}
             >
                 <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
 
@@ -107,13 +120,9 @@ function Map() {
                 ))}
 
                 <PlayerList />
-
                 <FlagList />
-
                 <MarkerList />
-
                 <ItemList />
-
                 <TrapList />
             </LeafletMap>
 

@@ -8,6 +8,17 @@ export const GameAreaProvider = ({ children }) => {
     const [gameAreas, setGameAreas] = useState([]);
     const { socket } = useSocket();
 
+    const createGameAreaPoint = (coordinates) => {
+        const newGA = _.cloneDeep(gameAreas);
+
+        newGA[0].coordinates[0].push(coordinates);
+        setGameAreas(newGA);
+        socket.emit('moveArea', {
+            coordinates: newGA[0].coordinates,
+            areaId: newGA[0].id,
+        });
+    };
+
     const moveGameArea = (coordinates, point) => {
         const newGA = _.cloneDeep(gameAreas);
         const index = _.findIndex(
@@ -37,13 +48,22 @@ export const GameAreaProvider = ({ children }) => {
         });
     };
 
+    const deleteGameAreas = () => {
+        socket.emit('moveArea', {
+            coordinates: [],
+            areaId: gameAreas[0].id,
+        });
+    };
+
     return (
         <GameAreaContext.Provider
             value={{
                 gameAreas,
                 setGameAreas,
+                createGameAreaPoint,
                 moveGameArea,
                 deleteGameAreaPoint,
+                deleteGameAreas,
             }}
         >
             {children}
