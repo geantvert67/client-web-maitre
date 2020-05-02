@@ -4,7 +4,7 @@ import { Button, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVectorSquare } from '@fortawesome/free-solid-svg-icons';
 import { getCenterOfBounds } from 'geolib';
-import Score from './Score';
+import ScoreModal from './ScoreModal';
 import { useSocket } from '../../utils/useSocket';
 import { useGameAreas } from '../../utils/useGameAreas';
 import GameArea from './GameArea';
@@ -16,13 +16,11 @@ import {
 } from '../../utils/map';
 import { useForbiddenAreas } from '../../utils/useForbiddenAreas';
 import ForbiddenArea from './ForbiddenArea';
-import { TrapMarker } from './Markers';
 import { useFlags } from '../../utils/useFlags';
-import { useMarkers } from '../../utils/useMarkers';
-import { useTeams } from '../../utils/useTeams';
 import PlayerList from './PlayerList';
 import { useItems } from '../../utils/useItems';
 import { useTraps } from '../../utils/useTraps';
+import { useTeams } from '../../utils/useTeams';
 import FlagList from './FlagList';
 import MarkerList from './MarkerList';
 import ItemList from './ItemList';
@@ -36,9 +34,9 @@ function Map() {
     const { gameAreas, setGameAreas } = useGameAreas();
     const { forbiddenAreas, setForbiddenAreas } = useForbiddenAreas();
     const { flags, deleteFlag } = useFlags();
-    const { setTeams } = useTeams();
     const { items, deleteItem } = useItems();
     const { traps, deleteTrap } = useTraps();
+    const { setTeams } = useTeams();
     const map = useRef(null);
 
     useEffect(() => {
@@ -48,11 +46,9 @@ function Map() {
         });
         socket.emit('getAreas');
 
-        socket.on('adminRoutine', (o) => {
-            if (!localStorage.getItem('moving')) {
-                setTeams(o.teams);
-            }
-        });
+        socket.on('getTeams', (t) => setTeams(t));
+        socket.emit('getTeams');
+
         const interval = setInterval(() => socket.emit('adminRoutine'), 1000);
         localStorage.removeItem('moving');
 
@@ -121,7 +117,7 @@ function Map() {
                 <TrapList />
             </LeafletMap>
 
-            <Score showScore={showScore} setShowScore={setShowScore} />
+            <ScoreModal showScore={showScore} setShowScore={setShowScore} />
 
             <Row className="btn-toast">
                 <Col xs="auto">

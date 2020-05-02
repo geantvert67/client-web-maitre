@@ -23,3 +23,7 @@ export const areItemEqual = (prevProps, nextProps) => {
 export const areTrapEqual = (prevProps, nextProps) => {
     return prevProps.trap.nbUpdates === nextProps.trap.nbUpdates;
 };
+
+export const areTeamEqual = (prevProps, nextProps) => {
+    return prevProps.team.score === nextProps.team.score;
+};
