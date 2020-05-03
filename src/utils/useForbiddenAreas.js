@@ -6,7 +6,24 @@ const ForbiddenAreaContext = createContext();
 
 export const ForbiddenAreaProvider = ({ children }) => {
     const [forbiddenAreas, setForbiddenAreas] = useState([]);
+    const [forbiddenAreaIndex, setForbiddenAreaIndex] = useState(null);
     const { socket } = useSocket();
+
+    const createForbiddenArea = () => {
+        socket.emit('createArea', true);
+        setForbiddenAreaIndex(forbiddenAreas.length);
+    };
+
+    const createForbiddenAreaPoint = (coordinates) => {
+        const newFA = _.cloneDeep(forbiddenAreas);
+
+        newFA[forbiddenAreaIndex].coordinates[0].push(coordinates);
+        setForbiddenAreas(newFA);
+        socket.emit('moveArea', {
+            coordinates: newFA[forbiddenAreaIndex].coordinates,
+            areaId: newFA[forbiddenAreaIndex].id,
+        });
+    };
 
     const moveForbiddenArea = (coordinates, point, areaId) => {
         const newFA = _.cloneDeep(forbiddenAreas);
@@ -37,13 +54,27 @@ export const ForbiddenAreaProvider = ({ children }) => {
         });
     };
 
+    const deleteForbiddenArea = (id) => {
+        socket.emit('deleteArea', id);
+    };
+
+    const deleteForbiddenAreas = () => {
+        socket.emit('deleteForbiddenAreas');
+    };
+
     return (
         <ForbiddenAreaContext.Provider
             value={{
                 forbiddenAreas,
                 setForbiddenAreas,
+                forbiddenAreaIndex,
+                setForbiddenAreaIndex,
+                createForbiddenArea,
+                createForbiddenAreaPoint,
                 moveForbiddenArea,
                 deleteForbiddenAreaPoint,
+                deleteForbiddenArea,
+                deleteForbiddenAreas,
             }}
         >
             {children}

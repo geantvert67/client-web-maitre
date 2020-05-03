@@ -34,7 +34,11 @@ function Map() {
     const [position, setPosition] = useState(null);
     const [showScore, setShowScore] = useState(false);
     const { gameAreas, setGameAreas, createGameAreaPoint } = useGameAreas();
-    const { forbiddenAreas, setForbiddenAreas } = useForbiddenAreas();
+    const {
+        forbiddenAreas,
+        setForbiddenAreas,
+        createForbiddenAreaPoint,
+    } = useForbiddenAreas();
     const { flags, deleteFlag } = useFlags();
     const { items, deleteItem } = useItems();
     const { traps, deleteTrap } = useTraps();
@@ -106,6 +110,8 @@ function Map() {
         switch (action) {
             case 'gameArea':
                 createGameAreaPoint(coordinates);
+            case 'forbiddenArea':
+                createForbiddenAreaPoint(coordinates);
         }
     };
 

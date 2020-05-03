@@ -4,6 +4,7 @@ import { useConfig } from '../../utils/useConfig';
 import { useSocket } from '../../utils/useSocket';
 import GameAreaActions from './GameAreaActions';
 import Collabsable from './Collapsable';
+import ForbiddenAreaActions from './ForbiddenAreaActions';
 
 function Sidebar() {
     const { config } = useConfig();
@@ -19,6 +20,10 @@ function Sidebar() {
 
             <Collabsable title="Zone de jeu" defaultOpen={true}>
                 <GameAreaActions />
+            </Collabsable>
+
+            <Collabsable title="Zones interdites" defaultOpen={false}>
+                <ForbiddenAreaActions />
             </Collabsable>
 
             <Row className="mt-5 justify-content-end">
