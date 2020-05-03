@@ -106,12 +106,13 @@ function Map() {
 
     const handleAction = (e) => {
         const coordinates = deserializeClick(e);
-
         switch (action) {
             case 'gameArea':
                 createGameAreaPoint(coordinates);
+                break;
             case 'forbiddenArea':
                 createForbiddenAreaPoint(coordinates);
+                break;
         }
     };
 
