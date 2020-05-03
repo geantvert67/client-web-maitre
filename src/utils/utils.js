@@ -27,3 +27,16 @@ export const areTrapEqual = (prevProps, nextProps) => {
 export const areTeamEqual = (prevProps, nextProps) => {
     return prevProps.team.score === nextProps.team.score;
 };
+
+export const serializeConfig = (config) => {
+    if (config.playerVisibilityRadius) {
+        config.playerVisibilityRadius = parseFloat(
+            config.playerVisibilityRadius
+        );
+    }
+    if (config.playerActionRadius) {
+        config.playerActionRadius = parseFloat(config.playerActionRadius);
+    }
+
+    return config;
+};

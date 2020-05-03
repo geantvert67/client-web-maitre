@@ -27,16 +27,13 @@ button:disabled {
     z-index: 998 !important;
 }
 
-.modal-header {
+.modal-header,
+.modal-footer {
     border: none !important;
 }
 
 .modal-content {
     background-color: #1b1e22 !important;
-}
-
-.modal-footer {
-    border-color: #26292f !important;
 }
 
 .btn-toast {
@@ -134,6 +131,13 @@ thead > tr > th {
 .leaflet-popup-tip {
     background-color: #26292f !important;
     color: white;
+}
+
+.input-light {
+    border: none !important;
+    background-color: #26292f !important;
+    border-radius: 4px;
+    color: #d2d2d2 !important;
 }
 
 @media (min-width: 768px) {

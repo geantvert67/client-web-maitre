@@ -12,7 +12,6 @@ function ConfigLoader() {
     const [showMap, setShowMap] = useState(true);
 
     useEffect(() => {
-        socket.on('getConfig', (c) => setConfig(c));
         socket.emit('getConfig');
     }, []);
 
