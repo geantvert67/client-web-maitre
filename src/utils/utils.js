@@ -37,6 +37,12 @@ export const serializeConfig = (config) => {
     if (config.playerActionRadius) {
         config.playerActionRadius = parseFloat(config.playerActionRadius);
     }
+    if (config.flagVisibilityRadius) {
+        config.flagVisibilityRadius = parseFloat(config.flagVisibilityRadius);
+    }
+    if (config.flagActionRadius) {
+        config.flagActionRadius = parseFloat(config.flagActionRadius);
+    }
 
     return config;
 };

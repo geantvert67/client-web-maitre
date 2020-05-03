@@ -6,6 +6,7 @@ import GameAreaActions from './GameAreaActions';
 import Collabsable from './Collapsable';
 import ForbiddenAreaActions from './ForbiddenAreaActions';
 import PlayerActions from './PlayerActions';
+import FlagActions from './FlagActions';
 
 function Sidebar() {
     const { config } = useConfig();
@@ -29,6 +30,10 @@ function Sidebar() {
 
             <Collabsable title="Joueurs" defaultOpen={false}>
                 <PlayerActions />
+            </Collabsable>
+
+            <Collabsable title="Cristaux" defaultOpen={false}>
+                <FlagActions />
             </Collabsable>
 
             <Row className="mt-5 justify-content-end">

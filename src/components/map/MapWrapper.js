@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import moment from 'moment';
-import Map from './Map';
+import { toast } from 'react-toastify';
 import { Alert, Button } from 'react-bootstrap';
+import Map from './Map';
 import { GameAreaProvider } from '../../utils/useGameAreas';
 import { ForbiddenAreaProvider } from '../../utils/useForbiddenAreas';
 import { PlayerProvider } from '../../utils/usePlayers';
@@ -13,9 +14,15 @@ import Timer from './Timer';
 import { TrapProvider } from '../../utils/useTraps';
 import { ActionProvider } from '../../utils/useAction';
 import SidebarWrapper from '../sidebar/SidebarWrapper';
+import { useSocket } from '../../utils/useSocket';
 
 function MapWrapper({ setShowMap }) {
     const { config } = useConfig();
+    const { socket } = useSocket();
+
+    useEffect(() => {
+        socket.on('onError', (err) => toast.error(err));
+    }, []);
 
     return (
         <div className="map-container">

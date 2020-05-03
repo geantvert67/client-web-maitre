@@ -39,7 +39,7 @@ function Map() {
         setForbiddenAreas,
         createForbiddenAreaPoint,
     } = useForbiddenAreas();
-    const { flags, deleteFlag } = useFlags();
+    const { flags, createFlag, deleteFlag } = useFlags();
     const { items, deleteItem } = useItems();
     const { traps, deleteTrap } = useTraps();
     const { setTeams } = useTeams();
@@ -112,6 +112,9 @@ function Map() {
                 break;
             case 'forbiddenArea':
                 createForbiddenAreaPoint(coordinates);
+                break;
+            case 'flag':
+                createFlag(coordinates);
                 break;
         }
     };

@@ -5,13 +5,17 @@ import { FlagMarker } from './Markers';
 
 function FlagList() {
     const { socket } = useSocket();
-    const { flags, setFlags } = useFlags();
+    const { flags, setFlags, showFlags } = useFlags();
 
     socket.on('adminRoutine', (o) => {
         if (!localStorage.getItem('moving')) setFlags(o.flags);
     });
 
-    return flags.map((flag) => <FlagMarker key={flag.id} flag={flag} />);
+    return showFlags ? (
+        flags.map((flag) => <FlagMarker key={flag.id} flag={flag} />)
+    ) : (
+        <></>
+    );
 }
 
 export default FlagList;
