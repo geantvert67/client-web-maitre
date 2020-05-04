@@ -11,7 +11,7 @@ function PlayerActions() {
         <Row className="mt-3 ml-1">
             <Col
                 xs="auto"
-                className="actions-item"
+                className="mb-3 actions-item"
                 onClick={() => setShowModal(true)}
             >
                 <FontAwesomeIcon icon={faCog} />

@@ -29,30 +29,23 @@ import moment from 'moment';
 import { useTraps } from '../../utils/useTraps';
 import { useAction } from '../../utils/useAction';
 
-function Marker({ ondragend, children, ...props }) {
-    const {
-        action,
-        setAction,
-        sleepingAction,
-        setSleepingAction,
-    } = useAction();
+function Marker({ ondragstart, ondragend, children, ...props }) {
+    const { action, setAction, setSleepingAction } = useAction();
 
     const handleDragStart = () => {
-        setAction('moveElement');
         setSleepingAction(action);
+        setAction('moveElement');
+        ondragstart && ondragstart();
     };
 
     const handleDragEnd = (e) => {
-        setTimeout(() => {
-            setAction(sleepingAction);
-            setSleepingAction(null);
-            ondragend(e);
-        }, 1);
+        setAction('moveElementStop');
+        ondragend && ondragend(e);
     };
 
     const handleClick = () => {
-        setAction('showPopup');
         setSleepingAction(action);
+        setAction('showPopup');
     };
 
     return (

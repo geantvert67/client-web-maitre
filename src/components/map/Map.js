@@ -80,6 +80,13 @@ function Map() {
     }, [gameAreas]);
 
     useEffect(() => {
+        if (action === 'moveElementStop' || action === 'showPopupStop') {
+            setAction(sleepingAction);
+            setSleepingAction(null);
+        }
+    }, [action]);
+
+    useEffect(() => {
         checkObjects(flags, deleteFlag);
         checkObjects(items, deleteItem);
         checkObjects(traps, deleteTrap);
@@ -119,13 +126,6 @@ function Map() {
         }
     };
 
-    const handlePopupClose = () => {
-        setTimeout(() => {
-            setAction(sleepingAction);
-            setSleepingAction(null);
-        }, 1);
-    };
-
     return (
         <>
             <LeafletMap
@@ -136,7 +136,7 @@ function Map() {
                 minZoom={5}
                 maxZoom={25}
                 onClick={handleAction}
-                onpopupclose={handlePopupClose}
+                onpopupclose={() => setAction('showPopupStop')}
             >
                 <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
 
