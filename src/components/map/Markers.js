@@ -123,7 +123,35 @@ export function PlayerMarker({ player }) {
     return (
         <Marker position={player.coordinates} icon={iconPlayer(color)}>
             <Popup>
-                {player.username} {!player.isConnected && '(Déconnecté)'}
+                <Row className="justify-content-center">
+                    <Col xs={12}>
+                        {player.username}{' '}
+                        {!player.isConnected && '(Déconnecté)'}
+                    </Col>
+
+                    {player.noyaux.length > 0 && (
+                        <Col xs={12}>
+                            {`Protégé par ${player.noyaux.length} noyau${
+                                player.noyaux.length > 1 ? 'x' : ''
+                            }`}
+                        </Col>
+                    )}
+
+                    {player.immobilizedUntil && (
+                        <Col xs={12}>
+                            Immobilisé pendant{' '}
+                            {secondsToDuration(
+                                moment
+                                    .duration(
+                                        moment(player.immobilizedUntil).diff(
+                                            moment()
+                                        )
+                                    )
+                                    .asSeconds()
+                            )}
+                        </Col>
+                    )}
+                </Row>
             </Popup>
         </Marker>
     );
