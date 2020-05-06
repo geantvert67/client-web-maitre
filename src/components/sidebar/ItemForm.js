@@ -29,12 +29,10 @@ function ItemForm({ showModal, handleClose, item, model = true }) {
             });
         } else {
             setCustomsErrors({});
-            if (model) {
-                socket.emit('updateItemModel', {
-                    id: item.id,
-                    newItem: serializeItem(newItem),
-                });
-            }
+            socket.emit(model ? 'updateItemModel' : 'updateItem', {
+                id: item.id,
+                newItem: serializeItem(newItem),
+            });
             handleClose();
         }
     };
@@ -48,6 +46,30 @@ function ItemForm({ showModal, handleClose, item, model = true }) {
             </Modal.Header>
             <Modal.Body>
                 <Form>
+                    {!model && (
+                        <Row>
+                            <Col xs={12} className="mb-4">
+                                <label>Quantité : </label>
+                                <input
+                                    className="ml-2 input-light"
+                                    name="quantity"
+                                    type="number"
+                                    defaultValue={item ? item.quantity : null}
+                                    ref={register({
+                                        min: {
+                                            value: 1,
+                                            message:
+                                                'La quantité doit être supérieure ou égale à 1',
+                                        },
+                                    })}
+                                />
+                            </Col>
+                            <Col xs="auto" className="danger">
+                                {errors.quantity && errors.quantity.message}
+                            </Col>
+                        </Row>
+                    )}
+
                     <Row>
                         <Col xs="12">
                             <label>Rayon de visibilité : </label>

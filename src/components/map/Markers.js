@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Marker as LeafletMarker, Popup, Circle } from 'react-leaflet';
 import {
     iconForbiddenArea,
@@ -28,6 +28,7 @@ import {
 import moment from 'moment';
 import { useTraps } from '../../utils/useTraps';
 import { useAction } from '../../utils/useAction';
+import ItemForm from '../sidebar/ItemForm';
 
 function Marker({ ondragstart, ondragend, children, ...props }) {
     const { action, setAction, setSleepingAction } = useAction();
@@ -288,6 +289,7 @@ export function MapMarker({ marker }) {
 
 export function Item({ item }) {
     const icon = getItemIcon(item.name);
+    const [showModal, setShowModal] = useState(false);
     const { moveItem, deleteItem, showRadius } = useItems();
 
     return (
@@ -325,6 +327,16 @@ export function Item({ item }) {
 
                         <Col className="mt-2" xs="auto">
                             <Button
+                                variant="light"
+                                size="sm"
+                                onClick={() => setShowModal(true)}
+                            >
+                                Modifier
+                            </Button>
+                        </Col>
+
+                        <Col className="mt-2" xs="auto">
+                            <Button
                                 variant="danger"
                                 size="sm"
                                 onClick={() => deleteItem(item)}
@@ -351,6 +363,13 @@ export function Item({ item }) {
                     />
                 </>
             )}
+
+            <ItemForm
+                item={item}
+                showModal={showModal}
+                handleClose={() => setShowModal(false)}
+                model={false}
+            />
         </>
     );
 }
