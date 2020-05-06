@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import '../../sidebar.css';
 import Sidebar from './Sidebar';
+import { ItemModelProvider } from '../../utils/useItemModels';
 
 function SidebarWrapper() {
     const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +11,9 @@ function SidebarWrapper() {
     return (
         <>
             <div className={`map-menu map-menu-${isOpen ? 'open' : 'closed'}`}>
-                <Sidebar />
+                <ItemModelProvider>
+                    <Sidebar />
+                </ItemModelProvider>
             </div>
             <div className="map-menu-angle" onClick={() => setIsOpen(!isOpen)}>
                 <FontAwesomeIcon

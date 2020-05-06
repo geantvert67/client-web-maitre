@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Button, Row, Col } from 'react-bootstrap';
 import { useConfig } from '../../utils/useConfig';
 import { useSocket } from '../../utils/useSocket';
@@ -7,10 +7,15 @@ import Collabsable from './Collapsable';
 import ForbiddenAreaActions from './ForbiddenAreaActions';
 import PlayerActions from './PlayerActions';
 import FlagActions from './FlagActions';
+import ItemActions from './ItemActions';
 
 function Sidebar() {
     const { config } = useConfig();
     const { socket } = useSocket();
+
+    useEffect(() => {
+        socket.emit('getItemModels');
+    }, []);
 
     const endGame = () => socket.emit('endGame');
 
@@ -34,6 +39,10 @@ function Sidebar() {
 
             <Collabsable title="Cristaux" defaultOpen={false}>
                 <FlagActions />
+            </Collabsable>
+
+            <Collabsable title="Items" defaultOpen={false}>
+                <ItemActions />
             </Collabsable>
 
             <Row className="mt-5 justify-content-end">

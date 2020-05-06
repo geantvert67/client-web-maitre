@@ -7,7 +7,10 @@ function Collabsable({ title, defaultOpen = false, children }) {
 
     return (
         <>
-            <div className="collapsable" onClick={() => setIsOpen(!isOpen)}>
+            <div
+                className="mt-2 collapsable"
+                onClick={() => setIsOpen(!isOpen)}
+            >
                 <h4>{title}</h4>
                 <FontAwesomeIcon icon={isOpen ? faChevronUp : faChevronDown} />
             </div>

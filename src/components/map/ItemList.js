@@ -5,13 +5,15 @@ import { ItemMarker } from './Markers';
 
 function ItemList() {
     const { socket } = useSocket();
-    const { items, setItems } = useItems();
+    const { items, setItems, hiddenItems } = useItems();
 
     socket.on('adminRoutine', (o) => {
         if (!localStorage.getItem('moving')) setItems(o.items);
     });
 
-    return items.map((item) => <ItemMarker key={item.id} item={item} />);
+    return items
+        .filter((i) => !hiddenItems.includes(i.name))
+        .map((item) => <ItemMarker key={item.id} item={item} />);
 }
 
 export default ItemList;

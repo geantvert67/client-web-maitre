@@ -288,7 +288,7 @@ export function MapMarker({ marker }) {
 
 export function Item({ item }) {
     const icon = getItemIcon(item.name);
-    const { moveItem, deleteItem } = useItems();
+    const { moveItem, deleteItem, showRadius } = useItems();
 
     return (
         <>
@@ -336,17 +336,21 @@ export function Item({ item }) {
                 </Popup>
             </Marker>
 
-            <Circle
-                center={item.coordinates}
-                radius={item.visibilityRadius}
-                stroke={false}
-            />
+            {showRadius && (
+                <>
+                    <Circle
+                        center={item.coordinates}
+                        radius={item.visibilityRadius}
+                        stroke={false}
+                    />
 
-            <Circle
-                center={item.coordinates}
-                radius={item.actionRadius}
-                stroke={false}
-            />
+                    <Circle
+                        center={item.coordinates}
+                        radius={item.actionRadius}
+                        stroke={false}
+                    />
+                </>
+            )}
         </>
     );
 }

@@ -46,3 +46,65 @@ export const serializeConfig = (config) => {
 
     return config;
 };
+
+export const serializeItem = (item) => {
+    item.autoMove = item.autoMove === 'true';
+    item.quantity = item.quantity ? parseInt(item.quantity) : null;
+    item.visibilityRadius = item.visibilityRadius
+        ? parseFloat(item.visibilityRadius)
+        : null;
+    item.actionRadius = item.actionRadius
+        ? parseFloat(item.actionRadius)
+        : null;
+    item.waitingPeriod = item.waitingPeriod
+        ? parseInt(item.waitingPeriod)
+        : null;
+    item.effectDuration = item.effectDuration
+        ? parseInt(item.effectDuration)
+        : null;
+    item.effectStrength = item.effectStrength
+        ? parseInt(item.effectStrength)
+        : null;
+
+    return item;
+};
+
+export const getItemImage = (name) => {
+    switch (name) {
+        case 'Sentinelle':
+            return require('../icons/sentinelle.png');
+        case 'Canon à photons':
+            return require('../icons/canonPhotons.gif');
+        case 'Antenne':
+            return require('../icons/antenne.png');
+        case 'Sonde':
+            return require('../icons/sonde.png');
+        case 'Portail de transfert':
+            return require('../icons/portail.png');
+        case 'Disloqueur':
+            return require('../icons/disloqueur.png');
+        case 'Intercepteur':
+            return require('../icons/intercepteur.gif');
+        case 'Noyau protecteur':
+            return require('../icons/noyau.png');
+        case 'Oracle':
+            return require('../icons/oracle.png');
+        case 'Tempête':
+            return require('../icons/tempete.png');
+        case 'Transducteur':
+            return require('../icons/transducteur.gif');
+        case 'Transporteur':
+            return require('../icons/transporteur.png');
+        default:
+            return require('../icons/cristal.png');
+    }
+};
+
+export const itemsWithDuration = [
+    'Sentinelle',
+    'Canon à photons',
+    'Intercepteur',
+    'Sonde',
+];
+
+export const itemsWithEffect = ['Intercepteur', 'Sonde'];

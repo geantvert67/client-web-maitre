@@ -74,6 +74,55 @@ input[type]:focus,
     box-shadow: 0px 1px 3px #1b1e22;
 }
 
+.radio-buttons-wrapper {
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+}
+
+.radio-buttons-wrapper input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #1b1e22;
+    border-radius: 50%;
+}
+
+.checkmark-light {
+    background-color: #26292f;
+}
+
+.radio-buttons-wrapper input:checked ~ .checkmark {
+    background-color: #68b684;
+}
+
+.checkmark:after {
+    content: '';
+    position: absolute;
+    display: none;
+}
+
+.radio-buttons-wrapper input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.radio-buttons-wrapper .checkmark:after {
+    top: 7px;
+    left: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
 .card {
     background-color: #1b1e22 !important;
     border: none !important;
@@ -97,6 +146,11 @@ input[type]:focus,
     width: 25px;
     border-radius: 4px;
     box-shadow: 0px 1px 3px #1b1e22;
+}
+
+.table-light {
+    border-radius: 4px !important;
+    background-color: #26292f !important;
 }
 
 .table {
@@ -136,6 +190,14 @@ thead > tr > th {
 .input-light {
     border: none !important;
     background-color: #26292f !important;
+    border-radius: 4px;
+    color: #d2d2d2 !important;
+}
+
+.input-dark {
+    background-color: #1b1e22 !important;
+    border: none !important;
+    box-shadow: 0px 1px 3px #1b1e22;
     border-radius: 4px;
     color: #d2d2d2 !important;
 }
