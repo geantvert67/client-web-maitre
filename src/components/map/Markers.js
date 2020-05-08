@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { Marker, Popup, Circle } from 'react-leaflet';
+import React, { useRef, useState } from 'react';
+import { Marker as LeafletMarker, Popup, Circle } from 'react-leaflet';
 import {
     iconForbiddenArea,
     iconGameArea,
@@ -27,6 +27,39 @@ import {
 } from '../../utils/utils';
 import moment from 'moment';
 import { useTraps } from '../../utils/useTraps';
+import { useAction } from '../../utils/useAction';
+import ItemForm from '../sidebar/ItemForm';
+
+function Marker({ ondragstart, ondragend, children, ...props }) {
+    const { action, setAction, setSleepingAction } = useAction();
+
+    const handleDragStart = () => {
+        setSleepingAction(action);
+        setAction('moveElement');
+        ondragstart && ondragstart();
+    };
+
+    const handleDragEnd = (e) => {
+        setAction('moveElementStop');
+        ondragend && ondragend(e);
+    };
+
+    const handleClick = () => {
+        setSleepingAction(action);
+        setAction('showPopup');
+    };
+
+    return (
+        <LeafletMarker
+            ondragstart={handleDragStart}
+            ondragend={handleDragEnd}
+            onClick={handleClick}
+            {...props}
+        >
+            {children}
+        </LeafletMarker>
+    );
+}
 
 export function GameAreaMarker({ position, areaId }) {
     const { moveGameArea, deleteGameAreaPoint } = useGameAreas();
@@ -90,7 +123,35 @@ export function PlayerMarker({ player }) {
     return (
         <Marker position={player.coordinates} icon={iconPlayer(color)}>
             <Popup>
-                {player.username} {!player.isConnected && '(Déconnecté)'}
+                <Row className="justify-content-center">
+                    <Col xs={12}>
+                        {player.username}{' '}
+                        {!player.isConnected && '(Déconnecté)'}
+                    </Col>
+
+                    {player.noyaux.length > 0 && (
+                        <Col xs={12}>
+                            {`Protégé par ${player.noyaux.length} noyau${
+                                player.noyaux.length > 1 ? 'x' : ''
+                            }`}
+                        </Col>
+                    )}
+
+                    {player.immobilizedUntil && (
+                        <Col xs={12}>
+                            Immobilisé pendant{' '}
+                            {secondsToDuration(
+                                moment
+                                    .duration(
+                                        moment(player.immobilizedUntil).diff(
+                                            moment()
+                                        )
+                                    )
+                                    .asSeconds()
+                            )}
+                        </Col>
+                    )}
+                </Row>
             </Popup>
         </Marker>
     );
@@ -256,7 +317,8 @@ export function MapMarker({ marker }) {
 
 export function Item({ item }) {
     const icon = getItemIcon(item.name);
-    const { moveItem, deleteItem } = useItems();
+    const [showModal, setShowModal] = useState(false);
+    const { moveItem, deleteItem, showRadius } = useItems();
 
     return (
         <>
@@ -293,6 +355,16 @@ export function Item({ item }) {
 
                         <Col className="mt-2" xs="auto">
                             <Button
+                                variant="light"
+                                size="sm"
+                                onClick={() => setShowModal(true)}
+                            >
+                                Modifier
+                            </Button>
+                        </Col>
+
+                        <Col className="mt-2" xs="auto">
+                            <Button
                                 variant="danger"
                                 size="sm"
                                 onClick={() => deleteItem(item)}
@@ -304,16 +376,27 @@ export function Item({ item }) {
                 </Popup>
             </Marker>
 
-            <Circle
-                center={item.coordinates}
-                radius={item.visibilityRadius}
-                stroke={false}
-            />
+            {showRadius && (
+                <>
+                    <Circle
+                        center={item.coordinates}
+                        radius={item.visibilityRadius}
+                        stroke={false}
+                    />
 
-            <Circle
-                center={item.coordinates}
-                radius={item.actionRadius}
-                stroke={false}
+                    <Circle
+                        center={item.coordinates}
+                        radius={item.actionRadius}
+                        stroke={false}
+                    />
+                </>
+            )}
+
+            <ItemForm
+                item={item}
+                showModal={showModal}
+                handleClose={() => setShowModal(false)}
+                model={false}
             />
         </>
     );

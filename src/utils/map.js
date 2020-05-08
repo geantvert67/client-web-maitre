@@ -11,6 +11,10 @@ export const deserializeDragend = (e) => {
     return [c.lat, c.lng];
 };
 
+export const deserializeClick = (e) => {
+    return [e.latlng.lat, e.latlng.lng];
+};
+
 export const formatAreas = (areas) => {
     return areas.map((a) => ({
         ...a,
