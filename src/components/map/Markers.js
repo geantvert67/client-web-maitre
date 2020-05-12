@@ -209,6 +209,9 @@ function Flag({ flag }) {
                                     <Form.Control
                                         ref={teamInput}
                                         style={{ width: '200px' }}
+                                        defaultValue={
+                                            flag.team ? flag.team.id : null
+                                        }
                                         as="select"
                                     >
                                         {teams.map((team) => (

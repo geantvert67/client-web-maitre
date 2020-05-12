@@ -12,6 +12,7 @@ function InvitationsListItem({ invitation }) {
             gameId: invitation.GameId,
             invitationId: invitation.id,
             accepted,
+            playerId: invitation.User.id,
             username: invitation.User.username,
         });
     };
