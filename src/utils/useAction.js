@@ -3,7 +3,7 @@ import React, { useState, createContext, useContext } from 'react';
 const ActionContext = createContext();
 
 export const ActionProvider = ({ children }) => {
-    const [action, setAction] = useState('gameArea');
+    const [action, setAction] = useState(null);
     const [sleepingAction, setSleepingAction] = useState(null);
 
     return (

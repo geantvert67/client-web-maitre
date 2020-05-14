@@ -25,7 +25,7 @@ function Sidebar() {
                 {`${config.name} - ${config.gameMode}`}
             </h3>
 
-            <Collabsable title="Zone de jeu" defaultOpen={true}>
+            <Collabsable title="Zone de jeu" defaultOpen={false}>
                 <GameAreaActions />
             </Collabsable>
 
