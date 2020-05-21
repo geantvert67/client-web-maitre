@@ -1,6 +1,11 @@
 import React from 'react';
 import { Container, Row, Col, Alert } from 'react-bootstrap';
 
+/**
+ * Composant Disconnected :
+ * Affiche une message d'erreur si l'application n'arrive pas à communiquer avec
+ * le serveur de jeu
+ */
 function Disconnected() {
     return (
         <Container className="mt-5">

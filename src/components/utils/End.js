@@ -6,6 +6,10 @@ import { useTeams } from '../../utils/useTeams';
 import { useSocket } from '../../utils/useSocket';
 import { secondsToDuration } from '../../utils/utils';
 
+/**
+ * Composant End :
+ * Écran de fin de partie avec le score de chaque équipe/joueur
+ */
 function End() {
     const { socket } = useSocket();
     const { config } = useConfig();

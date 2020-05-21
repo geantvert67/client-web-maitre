@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
+/**
+ * Composant DurationInput :
+ * Input permettant de choisir une durée en jour, heures, minutes et secondes
+ *
+ * props :
+ *   - duration : La durée à afficher
+ *   - setDuration : Fonction permettant de modifier la durée
+ *   - onBlur (optionnel) : Fonction qui sera appelée lors de l'évènement 'onBlur'
+ *                          sur les inputs
+ */
 function DurationInput({ duration, setDuration, onBlur = () => {} }) {
     const [secondes, setSecondes] = useState(duration % 60);
     const [minutes, setMinutes] = useState(Math.floor((duration % 3600) / 60));
