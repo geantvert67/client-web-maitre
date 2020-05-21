@@ -3,6 +3,16 @@ import { Button, Row, Col, Form } from 'react-bootstrap';
 import moment from 'moment';
 import { useSocket } from '../../utils/useSocket';
 
+/**
+ * Composant ConfigLauncher :
+ * Permet de lancer immédiatement ou planifier la partie
+ *
+ * props :
+ *   - launched : Si la partie est déjà lancée
+ *   - planned : Si la partie est déjà planifiée
+ *   - setShowMap : Fonction permettant de choisir si on doit afficher ou non
+ *                  la carte
+ */
 function ConfigLauncher({ launched, planned, setShowMap }) {
     const { socket } = useSocket();
     const [date, setDate] = useState(

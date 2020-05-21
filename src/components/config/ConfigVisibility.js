@@ -2,6 +2,13 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { useSocket } from '../../utils/useSocket';
 
+/**
+ * Composant ConfigVisibility:
+ * Permet de rendre une partie publique
+ *
+ * props:
+ *   - published : Si la partie est publique ou privée
+ */
 function ConfigVisibility({ published }) {
     const { socket } = useSocket();
 

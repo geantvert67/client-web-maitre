@@ -13,6 +13,11 @@ toast.configure({
     pauseOnHover: false,
 });
 
+/**
+ * Composant App :
+ * Point d'entrée de l'application, affiche un message d'erreur si elle n'arrive
+ * pas à communiquer avec le serveur de jeu
+ */
 function App() {
     const { connected } = useSocket();
 
