@@ -28,6 +28,10 @@ import MarkerList from './MarkerList';
 import ItemList from './ItemList';
 import TrapList from './TrapList';
 
+/**
+ * Composant Map :
+ * Affiche la carte et les différents marqueurs
+ */
 function Map() {
     const { socket } = useSocket();
     const [zoom, setZoom] = useState(17);

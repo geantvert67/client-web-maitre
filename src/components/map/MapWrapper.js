@@ -16,6 +16,14 @@ import { ActionProvider } from '../../utils/useAction';
 import SidebarWrapper from '../sidebar/SidebarWrapper';
 import { useSocket } from '../../utils/useSocket';
 
+/**
+ * Composant MapWrapper :
+ * Affiche la carte ainsi que diverses informations si nécessaire
+ *
+ * props :
+ *   - setShowMap : Fonction permettant de choisir si on doit afficher ou non
+ *                  la carte
+ */
 function MapWrapper({ setShowMap }) {
     const { config } = useConfig();
     const { socket } = useSocket();

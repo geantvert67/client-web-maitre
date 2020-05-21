@@ -3,6 +3,10 @@ import { useFlags } from '../../utils/useFlags';
 import { useSocket } from '../../utils/useSocket';
 import { FlagMarker } from './Markers';
 
+/**
+ * Composant FlagList :
+ * Liste des cristaux
+ */
 function FlagList() {
     const { socket } = useSocket();
     const { flags, setFlags, showFlags } = useFlags();

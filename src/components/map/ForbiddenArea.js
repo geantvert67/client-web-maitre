@@ -2,6 +2,13 @@ import React from 'react';
 import { Polygon } from 'react-leaflet';
 import { ForbiddenAreaMarker } from './Markers';
 
+/**
+ * Composant ForbiddenArea :
+ * Affiche les points d'une zone interdite
+ *
+ * props :
+ *   - area : La zone interdite
+ */
 function ForbiddenArea({ area }) {
     return (
         <>

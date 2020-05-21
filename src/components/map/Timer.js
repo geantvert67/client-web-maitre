@@ -5,6 +5,14 @@ import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { secondsToDuration } from '../../utils/utils';
 import { Row, Col } from 'react-bootstrap';
 
+/**
+ * Composant FlagForm :
+ * Affiche le temps restant de la partie
+ *
+ * props :
+ *   - duration : Durée de la partie
+ *   - launchedAt : Date à laquelle la partie a été lancée
+ */
 function Timer({ duration, launchedAt }) {
     const [time, setTime] = useState(null);
 

@@ -2,6 +2,13 @@ import React from 'react';
 import { Polygon } from 'react-leaflet';
 import { GameAreaMarker } from './Markers';
 
+/**
+ * Composant GameArea :
+ * Affiche les points de la zone de jeu
+ *
+ * props :
+ *   - area : La zone de jeu
+ */
 function GameArea({ area }) {
     return (
         <>
