@@ -2,7 +2,16 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
-function Collabsable({ title, defaultOpen = false, children }) {
+/**
+ * Composant Collapsable :
+ * Permet d'afficher ou non du contenu en cliquant sur son titre
+ *
+ * props :
+ *   - title: Titre
+ *   - defaultOpen (optionnel) : Si le contenu doit être affiché ou non par défaut
+ *   - children : Contenu
+ */
+function Collapsable({ title, defaultOpen = false, children }) {
     const [isOpen, setIsOpen] = useState(defaultOpen);
 
     return (
@@ -20,4 +29,4 @@ function Collabsable({ title, defaultOpen = false, children }) {
     );
 }
 
-export default Collabsable;
+export default Collapsable;

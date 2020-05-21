@@ -5,6 +5,10 @@ import '../../sidebar.css';
 import Sidebar from './Sidebar';
 import { ItemModelProvider } from '../../utils/useItemModels';
 
+/**
+ * Composant SidebarWrapper :
+ * Permet d'afficher ou non le menu latéral
+ */
 function SidebarWrapper() {
     const [isOpen, setIsOpen] = useState(false);
 

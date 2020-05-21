@@ -16,6 +16,10 @@ import { getItemImage } from '../../utils/utils';
 import { useForm } from 'react-hook-form';
 import ItemForm from './ItemForm';
 
+/**
+ * Composant ItemActions :
+ * Différentes actions réalisables sur les items
+ */
 function ItemActions() {
     const { itemModels } = useItemModels();
     const { showRadius, setShowRadius } = useItems();

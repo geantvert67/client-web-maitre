@@ -9,6 +9,14 @@ import {
     itemsWithEffect,
 } from '../../utils/utils';
 
+/**
+ * Composant FlagForm :
+ * Formulaire de modification des paramètres des items
+ *
+ * props :
+ *   - showModal : Si la pop-up doit être affichée ou non
+ *   - handleClose : Fonction appelée à la fermeture de la pop-up
+ */
 function ItemForm({ showModal, handleClose, item, model = true }) {
     const [duration, setDuration] = useState(item ? item.waitingPeriod : null);
     const [effectDuration, setEffectDuration] = useState(

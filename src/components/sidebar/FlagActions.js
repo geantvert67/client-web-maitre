@@ -13,6 +13,10 @@ import { useAction } from '../../utils/useAction';
 import { useFlags } from '../../utils/useFlags';
 import FlagForm from './FlagForm';
 
+/**
+ * Composant FlagActions :
+ * Différentes actions réalisables sur les cristaux
+ */
 function FlagActions() {
     const iconFlag = require('../../icons/cristal.png');
     const [showModal, setShowModal] = useState(false);

@@ -5,6 +5,10 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { useGameAreas } from '../../utils/useGameAreas';
 import { useAction } from '../../utils/useAction';
 
+/**
+ * Composant GameAreaActions :
+ * Différentes actions réalisables sur la zone de jeu
+ */
 function GameAreaActions() {
     const iconGameArea = require('../../icons/gameArea.png');
     const { deleteGameAreas } = useGameAreas();

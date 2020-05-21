@@ -3,12 +3,16 @@ import { Container, Button, Row, Col } from 'react-bootstrap';
 import { useConfig } from '../../utils/useConfig';
 import { useSocket } from '../../utils/useSocket';
 import GameAreaActions from './GameAreaActions';
-import Collabsable from './Collapsable';
+import Collapsable from './Collapsable';
 import ForbiddenAreaActions from './ForbiddenAreaActions';
 import PlayerActions from './PlayerActions';
 import FlagActions from './FlagActions';
 import ItemActions from './ItemActions';
 
+/**
+ * Composant Sidebar :
+ * Menu latéral
+ */
 function Sidebar() {
     const { config } = useConfig();
     const { socket } = useSocket();
@@ -25,25 +29,25 @@ function Sidebar() {
                 {`${config.name} - ${config.gameMode}`}
             </h3>
 
-            <Collabsable title="Zone de jeu" defaultOpen={false}>
+            <Collapsable title="Zone de jeu" defaultOpen={false}>
                 <GameAreaActions />
-            </Collabsable>
+            </Collapsable>
 
-            <Collabsable title="Zones interdites" defaultOpen={false}>
+            <Collapsable title="Zones interdites" defaultOpen={false}>
                 <ForbiddenAreaActions />
-            </Collabsable>
+            </Collapsable>
 
-            <Collabsable title="Joueurs" defaultOpen={false}>
+            <Collapsable title="Joueurs" defaultOpen={false}>
                 <PlayerActions />
-            </Collabsable>
+            </Collapsable>
 
-            <Collabsable title="Cristaux" defaultOpen={false}>
+            <Collapsable title="Cristaux" defaultOpen={false}>
                 <FlagActions />
-            </Collabsable>
+            </Collapsable>
 
-            <Collabsable title="Items" defaultOpen={false}>
+            <Collapsable title="Items" defaultOpen={false}>
                 <ItemActions />
-            </Collabsable>
+            </Collapsable>
 
             <Row className="mt-5 justify-content-end">
                 <Col xs="auto">
