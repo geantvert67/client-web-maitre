@@ -4,6 +4,10 @@ import { useSocket } from './useSocket';
 
 const GameAreaContext = createContext();
 
+/**
+ * Contexte permettant d'avoir accès aux fonctions de gestion de la zone de jeu
+ * partout dans le code
+ */
 export const GameAreaProvider = ({ children }) => {
     const [gameAreas, setGameAreas] = useState([]);
     const { socket } = useSocket();

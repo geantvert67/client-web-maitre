@@ -6,6 +6,10 @@ import { useSocket } from './useSocket';
 
 const MarkerContext = createContext();
 
+/**
+ * Contexte permettant d'avoir accès aux fonctions de gestion des point d'intérêts
+ * partout dans le code
+ */
 export const MarkerProvider = ({ children }) => {
     const [markers, setMarkers] = useState([]);
     const { socket } = useSocket();

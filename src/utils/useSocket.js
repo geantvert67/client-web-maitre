@@ -3,6 +3,9 @@ const socketIo = require('socket.io-client');
 
 const SocketContext = createContext();
 
+/**
+ * Contexte permettant de communiquer avec le serveur de jeu partout dans le code
+ */
 export const SocketProvider = ({ children }) => {
     const [socket, setSocket] = useState(null);
     const [connected, setConnected] = useState(false);

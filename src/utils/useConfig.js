@@ -3,6 +3,10 @@ import { useSocket } from './useSocket';
 
 const ConfigContext = createContext();
 
+/**
+ * Contexte permettant d'avoir accès aux fonctions de gestion de la config/partie
+ * partout dans le code
+ */
 export const ConfigProvider = ({ children }) => {
     const [config, setConfig] = useState(null);
     const { socket } = useSocket();

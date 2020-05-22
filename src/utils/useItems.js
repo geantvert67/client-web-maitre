@@ -8,6 +8,10 @@ import { toast } from 'react-toastify';
 const ItemContext = createContext();
 const ITEM_ERROR_MESSAGE = "L'item doit être placé dans la zone de jeu";
 
+/**
+ * Contexte permettant d'avoir accès aux fonctions de gestion des items
+ * partout dans le code
+ */
 export const ItemProvider = ({ children }) => {
     const [items, setItems] = useState([]);
     const [hiddenItems, setHiddenItems] = useState([]);

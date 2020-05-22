@@ -10,6 +10,10 @@ const FlagContext = createContext();
 const FLAG_ERROR_MESSAGE =
     "Le cristal doit être placé dans la zone de jeu et son rayon de visibilité ne doit pas toucher celui d'un autre cristal";
 
+/**
+ * Contexte permettant d'avoir accès aux fonctions de gestion des cristaux
+ * partout dans le code
+ */
 export const FlagProvider = ({ children }) => {
     const [flags, setFlags] = useState([]);
     const [showFlags, setShowFlags] = useState(true);

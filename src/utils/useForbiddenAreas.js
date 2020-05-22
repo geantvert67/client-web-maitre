@@ -4,6 +4,10 @@ import { useSocket } from './useSocket';
 
 const ForbiddenAreaContext = createContext();
 
+/**
+ * Contexte permettant d'avoir accès aux fonctions de gestion des zones interdites
+ * partout dans le code
+ */
 export const ForbiddenAreaProvider = ({ children }) => {
     const [forbiddenAreas, setForbiddenAreas] = useState([]);
     const [forbiddenAreaIndex, setForbiddenAreaIndex] = useState(null);

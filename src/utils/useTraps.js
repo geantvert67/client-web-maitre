@@ -6,6 +6,10 @@ import { useGameAreas } from './useGameAreas';
 
 const TrapContext = createContext();
 
+/**
+ * Contexte permettant d'avoir accès aux fonctions de gestion des pièges
+ * partout dans le code
+ */
 export const TrapProvider = ({ children }) => {
     const [traps, setTraps] = useState([]);
     const { socket } = useSocket();
