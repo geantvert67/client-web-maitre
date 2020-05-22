@@ -3,6 +3,10 @@ import { useMarkers } from '../../utils/useMarkers';
 import { useSocket } from '../../utils/useSocket';
 import { MarkerMarker } from './Markers';
 
+/**
+ * Composant MarkerList :
+ * Liste des points d'intérêt
+ */
 function MarkerList() {
     const { socket } = useSocket();
     const { markers, setMarkers } = useMarkers();

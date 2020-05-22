@@ -3,6 +3,10 @@ import { useSocket } from './useSocket';
 
 const ItemModelContext = createContext();
 
+/**
+ * Contexte permettant d'avoir accès aux fonctions de gestion des modèles d'item
+ * partout dans le code
+ */
 export const ItemModelProvider = ({ children }) => {
     const [itemModels, setItemModels] = useState([]);
     const { socket } = useSocket();

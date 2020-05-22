@@ -3,6 +3,10 @@ import { useItems } from '../../utils/useItems';
 import { useSocket } from '../../utils/useSocket';
 import { ItemMarker } from './Markers';
 
+/**
+ * Composant ItemList :
+ * Liste des items
+ */
 function ItemList() {
     const { socket } = useSocket();
     const { items, setItems, hiddenItems } = useItems();

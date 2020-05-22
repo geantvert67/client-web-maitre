@@ -4,6 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
 import PlayerForm from './PlayerForm';
 
+/**
+ * Composant PlayerActions :
+ * Différentes actions réalisables sur les joueurs
+ */
 function PlayerActions() {
     const [showModal, setShowModal] = useState(false);
 

@@ -1,3 +1,8 @@
+/**
+ * Convertit une durée exprimée en secondes en uen durée au format hh:mm:ss
+ *
+ * @param int seconds Durée à convertir
+ */
 export const secondsToDuration = (seconds) => {
     const h = Math.floor(seconds / 3600);
     const m = Math.floor((seconds % 3600) / 60);
@@ -8,26 +13,60 @@ export const secondsToDuration = (seconds) => {
     }:${s <= 0 ? '00' : ('0' + s).slice(-2)}`;
 };
 
+/**
+ * Compare si un cristal a été modifié entre 2 rendus
+ *
+ * @param object prevProps L'ancien cristal
+ * @param object nextProps Le nouveau cristal
+ */
 export const areFlagEqual = (prevProps, nextProps) => {
     return prevProps.flag.nbUpdates === nextProps.flag.nbUpdates;
 };
 
+/**
+ * Compare si un point d'intérêt a été modifié entre 2 rendus
+ *
+ * @param object prevProps L'ancien point d'intérêt
+ * @param object nextProps Le nouveau point d'intérêt
+ */
 export const areMarkerEqual = (prevProps, nextProps) => {
     return prevProps.marker.nbUpdates === nextProps.marker.nbUpdates;
 };
 
+/**
+ * Compare si un item a été modifié entre 2 rendus
+ *
+ * @param object prevProps L'ancien item
+ * @param object nextProps Le nouvel item
+ */
 export const areItemEqual = (prevProps, nextProps) => {
     return prevProps.item.nbUpdates === nextProps.item.nbUpdates;
 };
 
+/**
+ * Compare si un piège a été modifié entre 2 rendus
+ *
+ * @param object prevProps L'ancien piège
+ * @param object nextProps Le nouveau piège
+ */
 export const areTrapEqual = (prevProps, nextProps) => {
     return prevProps.trap.nbUpdates === nextProps.trap.nbUpdates;
 };
 
+/**
+ * Compare si un équipe a été modifié entre 2 rendus
+ *
+ * @param object prevProps L'ancienne équipe
+ * @param object nextProps La nouvelle équipe
+ */
 export const areTeamEqual = (prevProps, nextProps) => {
     return prevProps.team.score === nextProps.team.score;
 };
-
+/**
+ * Sérialise une configuration
+ *
+ * @param object config La configuration à sérialiser
+ */
 export const serializeConfig = (config) => {
     if (config.playerVisibilityRadius) {
         config.playerVisibilityRadius = parseFloat(
@@ -47,6 +86,11 @@ export const serializeConfig = (config) => {
     return config;
 };
 
+/**
+ * Sérialise un item
+ *
+ * @param object item L'item à sérializer
+ */
 export const serializeItem = (item) => {
     item.autoMove = item.autoMove === 'true';
     item.quantity = item.quantity ? parseInt(item.quantity) : null;
@@ -69,6 +113,11 @@ export const serializeItem = (item) => {
     return item;
 };
 
+/**
+ * Renvoie l'image d'un item à partir de son nom
+ *
+ * @param string name Nom de l'item
+ */
 export const getItemImage = (name) => {
     switch (name) {
         case 'Sentinelle':
@@ -100,6 +149,9 @@ export const getItemImage = (name) => {
     }
 };
 
+/**
+ * Liste des items ayant une durée d'utilisation
+ */
 export const itemsWithDuration = [
     'Sentinelle',
     'Canon à photons',
@@ -107,4 +159,7 @@ export const itemsWithDuration = [
     'Sonde',
 ];
 
+/**
+ * Liste des items ayant un impact sur le rayon de visibilité
+ */
 export const itemsWithEffect = ['Intercepteur', 'Sonde'];

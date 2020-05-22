@@ -4,6 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useSocket } from '../../utils/useSocket';
 
+/**
+ * Composant InvitationsListItem :
+ * Affiche une demande à rejoindre la partie
+ *
+ * props :
+ *   - invitation : La demande à rejoindre la partie
+ */
 function InvitationsListItem({ invitation }) {
     const { socket } = useSocket();
 

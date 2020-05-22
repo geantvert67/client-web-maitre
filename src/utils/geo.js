@@ -1,7 +1,17 @@
+/**
+ * Convertit un angle en Celcius en radians
+ * @param int degree L'angle à convertir
+ */
 const toRadian = (degree) => {
     return (degree * Math.PI) / 180;
 };
 
+/**
+ * Calcule la distance entre 2 points
+ *
+ * @param array origin Point de départ
+ * @param array destination Point d'arrivée
+ */
 export const getDistance = (origin, destination) => {
     let lon1 = toRadian(origin[1]),
         lat1 = toRadian(origin[0]),

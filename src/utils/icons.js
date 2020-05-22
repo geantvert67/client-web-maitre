@@ -1,5 +1,10 @@
 import L from 'leaflet';
 
+/**
+ * Renvoie l'icône d'un item à partir de son nom
+ *
+ * @param string name Nom de l'item
+ */
 export const getItemIcon = (name) => {
     switch (name) {
         case 'Sentinelle':

@@ -30,6 +30,15 @@ import { useTraps } from '../../utils/useTraps';
 import { useAction } from '../../utils/useAction';
 import ItemForm from '../sidebar/ItemForm';
 
+/**
+ * Composant Marker :
+ * Marqueur affiché sur la carte
+ *
+ * props :
+ *   - ondragstart : Fonction appelée au début du déplacement d'un marqueur
+ *   - ondragend : Fonction appelée à la fin du déplacement d'un marqueur
+ *   - children : Contenu du marqueur
+ */
 function Marker({ ondragstart, ondragend, children, ...props }) {
     const { action, setAction, setSleepingAction } = useAction();
 
@@ -61,6 +70,14 @@ function Marker({ ondragstart, ondragend, children, ...props }) {
     );
 }
 
+/**
+ * Composant GameAreaMarker :
+ * Marqueur pour un point de la zone de jeu
+ *
+ * props :
+ *   - position : La position du point
+ *   - areaId : L'identifiant de la zone de jeu
+ */
 export function GameAreaMarker({ position, areaId }) {
     const { moveGameArea, deleteGameAreaPoint } = useGameAreas();
     const popup = useRef(null);
@@ -88,6 +105,14 @@ export function GameAreaMarker({ position, areaId }) {
     );
 }
 
+/**
+ * Composant ForbiddenAreaMarker :
+ * Marqueur pour un point d'une zone interdite
+ *
+ * props :
+ *   - position : La position du point
+ *   - areaId : L'identifiant de la zone interdite
+ */
 export function ForbiddenAreaMarker({ position, areaId }) {
     const { moveForbiddenArea, deleteForbiddenAreaPoint } = useForbiddenAreas();
     const popup = useRef(null);
@@ -117,6 +142,13 @@ export function ForbiddenAreaMarker({ position, areaId }) {
     );
 }
 
+/**
+ * Composant PlayerMarker :
+ * Marqueur pour un joueur
+ *
+ * props :
+ *   - player: Le joueur
+ */
 export function PlayerMarker({ player }) {
     const color = player.isConnected ? player.teamColor : 'grey';
 
@@ -157,6 +189,13 @@ export function PlayerMarker({ player }) {
     );
 }
 
+/**
+ * Composant Flag :
+ * Marqueur pour un cristal
+ *
+ * props :
+ *   - flag: Le cristal
+ */
 function Flag({ flag }) {
     const color = flag.team ? flag.team.color : 'grey';
     const { config } = useConfig();
@@ -277,6 +316,13 @@ function Flag({ flag }) {
     );
 }
 
+/**
+ * Composant MapMarker :
+ * Marqueur pour un point d'intérêt
+ *
+ * props :
+ *   - marker: Le point d'intérêt
+ */
 export function MapMarker({ marker }) {
     const color = marker.team.color;
     const { moveMarker, deleteMarker } = useMarkers();
@@ -318,6 +364,13 @@ export function MapMarker({ marker }) {
     );
 }
 
+/**
+ * Composant Item :
+ * Marqueur pour un item
+ *
+ * props :
+ *   - item: L'item
+ */
 export function Item({ item }) {
     const icon = getItemIcon(item.name);
     const [showModal, setShowModal] = useState(false);
@@ -405,6 +458,13 @@ export function Item({ item }) {
     );
 }
 
+/**
+ * Composant Trap :
+ * Marqueur pour un piège
+ *
+ * props :
+ *   - trap: Le piège
+ */
 export function Trap({ trap }) {
     const icon = getItemIcon(trap.name);
     const { moveTrap, deleteTrap } = useTraps();
@@ -470,7 +530,26 @@ export function Trap({ trap }) {
     );
 }
 
+/**
+ * Composant FlagMarker :
+ * Modifie le composant Flag uniquement si le cristal a changé
+ */
 export const FlagMarker = React.memo(Flag, areFlagEqual);
+
+/**
+ * Composant MarkerMarker :
+ * Modifie le composant MapMarker uniquement si le point d'intérêt a changé
+ */
 export const MarkerMarker = React.memo(MapMarker, areMarkerEqual);
+
+/**
+ * Composant ItemMarker :
+ * Modifie le composant Item uniquement si l'item a changé
+ */
 export const ItemMarker = React.memo(Item, areItemEqual);
+
+/**
+ * Composant TrapMarker :
+ * Modifie le composant Trap uniquement si le piège a changé
+ */
 export const TrapMarker = React.memo(Trap, areTrapEqual);

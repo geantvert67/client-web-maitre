@@ -3,6 +3,10 @@ import { useTraps } from '../../utils/useTraps';
 import { useSocket } from '../../utils/useSocket';
 import { TrapMarker } from './Markers';
 
+/**
+ * Composant TrapList :
+ * Liste des pièges
+ */
 function TrapList() {
     const { socket } = useSocket();
     const { traps, setTraps } = useTraps();

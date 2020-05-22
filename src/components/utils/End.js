@@ -6,6 +6,10 @@ import { useTeams } from '../../utils/useTeams';
 import { useSocket } from '../../utils/useSocket';
 import { secondsToDuration } from '../../utils/utils';
 
+/**
+ * Composant End :
+ * Écran de fin de partie avec le score de chaque équipe/joueur
+ */
 function End() {
     const { socket } = useSocket();
     const { config } = useConfig();
@@ -99,16 +103,15 @@ function Score({ teams, gameMode }) {
                         </Card>
                     </Col>
                     <Col xs="8">
-                        {_.orderBy(team.players, ['score'], ['desc']).map(
-                            (p) => (
-                                <Card
-                                    key={p.username}
-                                    className="px-3 py-2 my-1"
-                                >
-                                    <ScoreItem player={p} gameMode={gameMode} />
-                                </Card>
-                            )
-                        )}
+                        {_.orderBy(
+                            team.players,
+                            ['statistics.score'],
+                            ['desc']
+                        ).map((p) => (
+                            <Card key={p.username} className="px-3 py-2 my-1">
+                                <ScoreItem player={p} gameMode={gameMode} />
+                            </Card>
+                        ))}
                     </Col>
                 </Row>
             ))}
@@ -130,8 +133,8 @@ function ScoreItem({ player, gameMode }) {
                 <Row>
                     <Col xs="12" className="text-center">
                         {gameMode === 'TIME'
-                            ? secondsToDuration(player.score)
-                            : player.score}
+                            ? secondsToDuration(player.statistics.score)
+                            : player.statistics.score}
                     </Col>
                 </Row>
             </Col>

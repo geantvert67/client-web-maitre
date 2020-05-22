@@ -5,6 +5,10 @@ import { faTrashAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useForbiddenAreas } from '../../utils/useForbiddenAreas';
 import { useAction } from '../../utils/useAction';
 
+/**
+ * Composant ForbiddenAreaActions :
+ * Différentes actions réalisables sur les zones interdites
+ */
 function ForbiddenAreaActions() {
     const {
         forbiddenAreas,

@@ -3,6 +3,10 @@ import { usePlayers } from '../../utils/usePlayers';
 import { useSocket } from '../../utils/useSocket';
 import { PlayerMarker } from './Markers';
 
+/**
+ * Composant PlayerList :
+ * Liste des joueurs
+ */
 function PlayerList() {
     const { socket } = useSocket();
     const { players, setPlayers } = usePlayers();

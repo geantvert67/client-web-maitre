@@ -6,6 +6,15 @@ import { useConfig } from '../../utils/useConfig';
 import { secondsToDuration, areTeamEqual } from '../../utils/utils';
 import { useSocket } from '../../utils/useSocket';
 
+/**
+ * Composant ScoreModal :
+ * Pop-up affichant le score de chaque équipe
+ *
+ * props :
+ *   - showScore : Si la pop-up doit être affichée ou non
+ *   - setShowScore : Fonction permettant de choisir si la pop-up doit être affichée
+ *                    ou non
+ */
 function ScoreModal({ showScore, setShowScore }) {
     return (
         <Modal show={showScore} onHide={() => setShowScore(false)} centered>

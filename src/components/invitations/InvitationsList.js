@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useSocket } from '../../utils/useSocket';
 import InvitationsListItem from './InvitationsListItem';
 
+/**
+ * Composant InvitationsList :
+ * Affiche la liste des demandes à rejoindre la partie
+ */
 function InvitationsList() {
     const { socket } = useSocket();
     const [invitations, setInvitations] = useState([]);

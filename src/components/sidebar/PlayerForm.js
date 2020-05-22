@@ -5,6 +5,14 @@ import { useConfig } from '../../utils/useConfig';
 import { useSocket } from '../../utils/useSocket';
 import { serializeConfig } from '../../utils/utils';
 
+/**
+ * Composant FlagForm :
+ * Formulaire de modification des paramètres des joueurs
+ *
+ * props :
+ *   - showModal : Si la pop-up doit être affichée ou non
+ *   - handleClose : Fonction appelée à la fermeture de la pop-up
+ */
 function PlayerForm({ showModal, handleClose }) {
     const { register, handleSubmit, getValues, errors } = useForm();
     const { config } = useConfig();

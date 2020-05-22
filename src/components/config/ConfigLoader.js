@@ -6,6 +6,11 @@ import MapWrapper from '../map/MapWrapper';
 import { useConfig } from '../../utils/useConfig';
 import End from '../utils/End';
 
+/**
+ * Composant ConfigLoader :
+ * Récupère la configuration et affiche la carte ou ses informations en fonction
+ * de si la partie a déjà demarré ou non
+ */
 function ConfigLoader() {
     const { socket } = useSocket();
     const { config, setConfig } = useConfig();

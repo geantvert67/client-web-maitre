@@ -2,6 +2,13 @@ import React from 'react';
 import _ from 'lodash';
 import { Card } from 'react-bootstrap';
 
+/**
+ * Composant PlayerList :
+ * Affiche les membres d'une équipe
+ *
+ * props :
+ *   - players : Liste des membres de l'équipe
+ */
 function PlayersList({ players }) {
     return players.length > 0 ? (
         _.sortBy(players, ['username']).map((player) => {

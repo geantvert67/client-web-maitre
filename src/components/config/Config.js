@@ -7,6 +7,14 @@ import { useConfig } from '../../utils/useConfig';
 import InvitationsList from '../invitations/InvitationsList';
 import ConfigAccessKey from './ConfigAccessKey';
 
+/**
+ * Composant Config :
+ * Regroupe toutes les informations sur la configuration/partie
+ *
+ * props :
+ *   - setShowMap : Fonction permettant de choisir si on doit afficher ou non
+ *                  la carte
+ */
 function Config({ setShowMap }) {
     const { config } = useConfig();
 

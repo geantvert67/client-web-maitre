@@ -4,6 +4,13 @@ import { useSocket } from '../../utils/useSocket';
 import { Card, Row, Col, Accordion } from 'react-bootstrap';
 import PlayersList from './PlayersList';
 
+/**
+ * Composant TeamsList :
+ * Affiche les équipes
+ *
+ * props :
+ *   - maxPlayers : Nombre maximum de joueur par équipe
+ */
 function TeamsList({ maxPlayers }) {
     const { socket } = useSocket();
     const [teams, setTeams] = useState([]);
