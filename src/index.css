@@ -202,6 +202,16 @@ thead > tr > th {
     color: #d2d2d2 !important;
 }
 
+.inventory-item {
+    background-color: #26292f;
+    padding: 0.75rem 1.25rem !important;
+    border-radius: 4px;
+}
+
+.inventory-item-equiped {
+    border: 1px solid #68b684;
+}
+
 @media (min-width: 768px) {
     .modal-dialog {
         max-width: 700px !important;
