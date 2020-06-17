@@ -168,16 +168,16 @@ function Map() {
 
             <Row className="btn-toast">
                 <Col xs="auto">
-                    <Button onClick={centerOnGameArea} variant="light">
-                        <FontAwesomeIcon icon={faVectorSquare} />
-                    </Button>
-                </Col>
-                <Col xs="auto">
                     <Button
                         onClick={() => setShowScore(true)}
                         variant="success"
                     >
                         Score
+                    </Button>
+                </Col>
+                <Col xs="auto">
+                    <Button onClick={centerOnGameArea} variant="light">
+                        <FontAwesomeIcon icon={faVectorSquare} />
                     </Button>
                 </Col>
             </Row>
